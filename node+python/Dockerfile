@@ -9,7 +9,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk --no-cache add -f bash \
                              python \
                              python-dev \
-                             python-pip  \
+                             python-pip \
                              tzdata \
                              nodejs \
                              npm \
