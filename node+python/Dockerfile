@@ -1,4 +1,4 @@
-FROM alpine
+FROM python:3.9.1-alpine
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     SHELL=/bin/bash \
@@ -8,8 +8,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f bash \
-                             python3 \
-                             python3-dev \
+                             build-base \
+                             libffi-dev \
                              tzdata \
                              nodejs \
                              npm \
@@ -22,8 +22,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              tzdata \
                              perl \
                              openssl \
-    && python3 /root/get-pip.py \
+    && pip --no-cache-dir install aiohttp requests \
+    && rm -rf ~/.cache/pip \
+    && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/* \
+    && apk del libffi-dev build-base \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone \
-WORKDIR /root
+    && echo "Asia/Shanghai" > /etc/timezone
+WORKDIR /
