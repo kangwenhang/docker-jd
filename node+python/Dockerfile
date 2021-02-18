@@ -2,6 +2,7 @@ FROM ubuntu:20.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG="C.UTF-8" \
     LC_ALL="C.UTF-8" \
+    TERM=screen \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ "
 RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
