@@ -21,11 +21,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              tzdata \
                              perl \
                              openssl \
-    && pip --no-cache-dir install aiohttp requests \
+    && pip --no-cache-dir install aiohttp requests wasmtime \
     && rm -rf ~/.cache/pip \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/* \
-    && apk del libffi-dev build-base \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
 WORKDIR /
