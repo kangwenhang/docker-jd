@@ -1,27 +1,31 @@
-FROM python:3.6.13-alpine
+FROM ubuntu:20.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ "
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && apk update -f \
-    && apk upgrade \
-    && apk --no-cache add -f bash \
-                             build-base \
-                             libffi-dev \
-                             tzdata \
-                             nodejs \
-                             npm \
-                             coreutils \
-                             moreutils \
-                             git \
-                             wget \
-                             curl \
-                             nano \
-                             tzdata \
-                             perl \
-                             openssl \
-    && pip --no-cache-dir install aiohttp requests wasmtime \
+RUN sed -i ‘s/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/mirrors.163.com\/ubuntu\//g’ /etc/apt/sources.list \
+    && apt-get clean \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y python3 \
+                          build-base \
+                          libffi-dev \
+                          tzdata \
+                          nodejs \
+                          npm \
+                          coreutils \
+                          moreutils \
+                          git \
+                          wget \
+                          vim \
+                          curl \
+                          nano \
+                          tzdata \
+                          perl \
+                          openssl \
+    && wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py \
+    && python3 /tmp/get-pip.py \
+    && pip install \
     && rm -rf ~/.cache/pip \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/* \
