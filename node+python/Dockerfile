@@ -22,6 +22,7 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
                           nano \
                           tzdata \
                           perl \
+                          python3-pip \
                           openssl \
     && wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py \
     && python3 /tmp/get-pip.py \
