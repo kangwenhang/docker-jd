@@ -1,4 +1,4 @@
-FROM python:3.9.1-alpine
+FROM python:3.6.13-alpine
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     SHELL=/bin/bash \
