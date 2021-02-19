@@ -7,8 +7,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f bash \
-                             build-base \
-                             libffi-dev \
                              tzdata \
                              nodejs \
                              npm \
@@ -21,6 +19,14 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              tzdata \
                              perl \
                              openssl \
+                             make \
+                             gcc \
+                             g++ \
+                             libc-dev \
+                             musl-dev \
+                             musl \
+                             autoconf \ 
+                             libtool \
     && pip --no-cache-dir install aiohttp requests wasmtime \
     && rm -rf ~/.cache/pip \
     && rm -rf /tmp/* \
