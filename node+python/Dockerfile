@@ -10,6 +10,7 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
     && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y python3 \
+                          python3-pip \
                           tzdata \
                           nodejs \
                           npm \
@@ -23,11 +24,6 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
                           tzdata \
                           perl \
                           openssl \
-    && wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py \
-    && python3 /tmp/get-pip.py \
-    && pip install \
-    && rm -rf ~/.cache/pip \
-    && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
