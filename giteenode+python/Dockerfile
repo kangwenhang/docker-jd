@@ -33,7 +33,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/* \
     && mkdir -p /root/.ssh \
-    && mv /root/id_rsa /root/.ssh/ \
+    && cp /root/id_rsa /root/.ssh/ \
     && chmod 600 /root/.ssh/id_rsa \
     && ssh-keyscan gitee.com > /root/.ssh/known_hosts \
     && git clone -b ${JD_BASE_BRANCH} ${JD_BASE_URL} ${JD_DIR} \
