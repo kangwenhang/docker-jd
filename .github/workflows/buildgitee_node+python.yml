@@ -18,7 +18,7 @@ jobs:
           publish: true
           imageName: k1483162508/base
           dockerFile: giteenode+python/Dockerfile
-          platform: linux/amd64
+          platform: linux/amd64,linux/arm64,linux/arm/v7
           tag: 2.0
           dockerUser: ${{ secrets.DOCKER_USERNAME }}
           dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
