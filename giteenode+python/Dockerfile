@@ -6,7 +6,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     SHELL=/bin/bash \
     JD_DIR=/jd \
     PS1="\u@\h:\w \$ "
-COPY /docker-base/giteenode+python/id_rsa ./root/
+COPY docker-jd/docker-base/giteenode+python/id_rsa ./root
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update -f \
     && apk upgrade \
