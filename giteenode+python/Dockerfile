@@ -9,6 +9,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f bash \
+                             build-base \
+                             libffi-dev \
                              tzdata \
                              nodejs \
                              npm \
@@ -34,6 +36,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && echo -e $KEY > /root/.ssh/id_rsa \
     && chmod 600 /root/.ssh/id_rsa \
     && ssh-keyscan gitee.com > /root/.ssh/known_hosts \
+    && npm insttall -g websocket \
+    && apk del make gcc g++ musl-dev musl autoconf build-base libffi-dev libtool \
     && rm -rf /tmp/* \
     && rm -rf ~/.cache/pip \
     && rm -rf /var/cache/apk/* 
