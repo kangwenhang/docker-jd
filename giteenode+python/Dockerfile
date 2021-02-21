@@ -36,7 +36,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && echo -e $KEY > /root/.ssh/id_rsa \
     && chmod 600 /root/.ssh/id_rsa \
     && ssh-keyscan gitee.com > /root/.ssh/known_hosts \
-    && npm insttall -g websocketserver \
+    && npm install -g websocketserver \
     && apk del make gcc g++ musl-dev musl autoconf build-base libffi-dev libtool \
     && rm -rf /tmp/* \
     && rm -rf ~/.cache/pip \
