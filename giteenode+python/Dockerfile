@@ -5,7 +5,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ "
-COPY ../id_rsa /root
+COPY id_rsa /root
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update -f \
     && apk upgrade \
@@ -33,7 +33,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/* \
     && mkdir -p /root/.ssh \
-    && cp /root/id_rsa /root/.ssh/ \
+    && cp –r /root /root/.ssh \
     && chmod 600 /root/.ssh/id_rsa \
     && ssh-keyscan gitee.com > /root/.ssh/known_hosts \
     && git clone -b ${JD_BASE_BRANCH} ${JD_BASE_URL} ${JD_DIR} \
