@@ -8,16 +8,17 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f bash \
+                             build-base \
+                             libffi-dev \
                              tzdata \
                              nodejs \
-                             libffi-dev \
-                             build-base \
                              npm \
                              git \
                              wget \
                              curl \
                              nano \
                              perl \
+                             make \
                              openssl \
                              make \
                              gcc \
@@ -35,6 +36,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && mkdir -p /root/.ssh \
     && mv /root/id_rsa /root/.ssh/ \
     && chmod 600 /root/.ssh/id_rsa \
+    && ssh-keyscan gitee.com > /root/.ssh/known_hosts \
     && apk del libffi-dev build-base \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
