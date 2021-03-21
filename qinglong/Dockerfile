@@ -2,7 +2,7 @@ FROM k1483162508/base:2
 LABEL maintainer="whyour"
 ARG JD_BASE_URL=https://github.com.cnpmjs.org/whyour/qinglong
 ARG JD_BASE_BRANCH=master
-ARG JD_SCRIPTS_URL=git@gitee.com:lxk0301/jd_scripts.git
+ARG JD_SCRIPTS_URL=git@lxk:lxk0301/jd_scripts.git
 ARG JD_SCRIPTS_BRANCH=master
 ENV JD_DIR=/jd
 RUN touch ~/.bashrc \
