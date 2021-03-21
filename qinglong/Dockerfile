@@ -16,8 +16,7 @@ RUN touch ~/.bashrc \
     && ln -sf ${JD_DIR}/shell/export_sharecodes.sh /usr/local/bin/export_sharecodes \
     && ln -sf ${JD_DIR}/shell/git_diy.sh /usr/local/bin/diy \
     && ln -sf ${JD_DIR}/shell/notify.sh /usr/local/bin/notify \
-    && yarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass \
-    && yarn install --production \
+    && npm install --production \
     && git clone -b ${JD_SCRIPTS_BRANCH} ${JD_SCRIPTS_URL} ${JD_DIR}/scripts \
     && cd ${JD_DIR}/scripts \
     && npm install --production\
