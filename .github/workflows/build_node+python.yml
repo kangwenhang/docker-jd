@@ -1,4 +1,4 @@
-name: "构建基础镜像"
+name: "构建基础镜像-gitee"
 on:
   push:
     branches:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: 构建基础镜像
+    name: 构建基础镜像-gitee
     steps:
       - name: Checkout master
         uses: actions/checkout@master
@@ -17,8 +17,8 @@ jobs:
         with:
           publish: true
           imageName: k1483162508/base
-          dockerFile: node+python/Dockerfile
-          platform: linux/amd64
-          tag: 1.0
+          dockerFile: giteenode+python/Dockerfile
+          platform: linux/amd64,linux/arm64,linux/arm/v7
+          tag: 2.0
           dockerUser: ${{ secrets.DOCKER_USERNAME }}
           dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
