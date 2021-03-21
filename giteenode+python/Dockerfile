@@ -40,10 +40,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && echo -e $kwjKEY > /root/.ssh/id_rsa_kwj \
     && echo -e $EKEY > /root/.ssh/id_rsa_E \
     && chmod 600 /root/.ssh/id_rsa_lxk /root/.ssh/id_rsa_kwj /root/.ssh/id_rsa_E \
-    && echo -e "Host kwj\n\tHostname github.com\n\tIdentityFile=/root/.ssh/id_rsa_kwj\n\nHost lxk\n\tHostname gitee.com\n\tIdentityFile=/root/.ssh/id_rsa_lxk\n\nHost E\n\tHostname gitee.com\n\tIdentityFile=/root/.ssh/id_rsa_E" > /root/.ssh/config \
+    && echo -e "\tHost kwj\n\tHostname github.com\n\tIdentityFile=/root/.ssh/id_rsa_kwj\n\n\tHost lxk\n\tHostname gitee.com\n\tIdentityFile=/root/.ssh/id_rsa_lxk\n\n\tHost E\n\tHostname gitee.com\n\tIdentityFile=/root/.ssh/id_rsa_E" > /root/.ssh/config \
     && chmod 644 /root/.ssh/config \
-    && ssh-keyscan gitee.com > /root/.ssh/known_hosts \
-    && ssh-keyscan github.com > /root/.ssh/known_hosts \
+    && ssh-keyscan gitee.com\ngithub.com > /root/.ssh/known_hosts \
     && npm install -g websocketserver pm2 \
     && apk del gcc g++ musl-dev musl autoconf build-base libffi-dev libtool \
     && rm -rf /tmp/* \
