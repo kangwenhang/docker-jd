@@ -38,7 +38,7 @@ RUN source ~/.bashrc \
                           musl \
                           autoconf \ 
                           libtool \
-                          openssh-server  \
+                          openssl \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && pip --no-cache-dir install aiohttp requests wasmtime utils \
