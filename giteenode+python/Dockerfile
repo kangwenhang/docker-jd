@@ -15,7 +15,6 @@ RUN source ~/.bashrc \
                           apt-utils \
                           python3 \
                           python3-pip \
-                          build-base \
                           libffi-dev \
                           tzdata \
                           nodejs \
@@ -39,7 +38,7 @@ RUN source ~/.bashrc \
                           musl \
                           autoconf \ 
                           libtool \
-                          openssh \
+                          openssh-server  \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && pip --no-cache-dir install aiohttp requests wasmtime utils \
