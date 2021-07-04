@@ -48,6 +48,7 @@ RUN source ~/.bashrc \
     && chmod 600 /root/.ssh/id_rsa_kwj \
     && echo -e "\tHost kwj\n\tHostname github.com\n\tIdentityFile=/root/.ssh/id_rsa_kwj" > /root/.ssh/config \
     && chmod 644 /root/.ssh/config \
+    && npm config set strict-ssl false \
     && npm install -g websocketserver pm2 \
     && apt-get clean \
     && apt-get autoclean \ 
