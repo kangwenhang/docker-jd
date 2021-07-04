@@ -12,6 +12,7 @@ SHELL ["/bin/bash", "-c"]
 RUN source ~/.bashrc \
     && apt-get update \
     && apt-get install -y bash \
+                          build-essential \
                           apt-utils \
                           python3 \
                           python3-pip \
@@ -48,7 +49,6 @@ RUN source ~/.bashrc \
     && echo -e "\tHost kwj\n\tHostname github.com\n\tIdentityFile=/root/.ssh/id_rsa_kwj" > /root/.ssh/config \
     && chmod 644 /root/.ssh/config \
     && npm install -g websocketserver pm2 \
-    && apt-get --purge remove gcc musl-dev musl autoconf build-base libffi-dev libtool \
     && apt-get clean \
     && apt-get autoclean \ 
     && rm -rf /var/lib/apt/lists/*
