@@ -51,6 +51,7 @@ RUN source ~/.bashrc \
     && chmod 644 /root/.ssh/config \
     && npm config set strict-ssl false \
     && npm install -g websocketserver pm2 pnpm \
+    && rm -rf /root/.npm \
     && apt-get clean \
     && apt-get autoclean \ 
     && rm -rf /var/lib/apt/lists/*
