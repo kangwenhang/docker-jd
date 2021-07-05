@@ -50,7 +50,7 @@ RUN source ~/.bashrc \
     && echo -e "\tHost kwj\n\tHostname github.com\n\tIdentityFile=/root/.ssh/id_rsa_kwj" > /root/.ssh/config \
     && chmod 644 /root/.ssh/config \
     && npm config set strict-ssl false \
-    && npm install -g websocketserver pm2 \
+    && npm install -g websocketserver pm2 pnpm \
     && apt-get clean \
     && apt-get autoclean \ 
     && rm -rf /var/lib/apt/lists/*
