@@ -40,6 +40,7 @@ RUN source ~/.bashrc \
                           autoconf \ 
                           libtool \
                           openssl \
+                          jq\
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && pip --no-cache-dir install aiohttp requests wasmtime utils \
