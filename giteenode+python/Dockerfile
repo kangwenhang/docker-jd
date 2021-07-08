@@ -8,7 +8,8 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     QL_DIR=/ql \
     DEBIAN_FRONTEND=noninteractive \
     PS1="\u@\h:\w \$ "
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+RUN source ~/.bashrc \
+    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f bash \
@@ -49,6 +50,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && npm config set strict-ssl false \
     && npm install -g websocketserver pm2 pnpm \
     && rm -rf /root/.npm \
-    && && rm -rf /tmp/* \
+    && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
 WORKDIR /
