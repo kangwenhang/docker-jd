@@ -8,7 +8,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     QL_DIR=/ql \
     DEBIAN_FRONTEND=noninteractive \
     PS1="\u@\h:\w \$ "
-SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/sh", "-c"]
 RUN source ~/.bashrc \
     && apt-get update \
     && apt-get install -y bash \
