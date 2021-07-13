@@ -47,7 +47,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && echo -e "\tHost kwj\n\tHostname github.com\n\tIdentityFile=/root/.ssh/id_rsa_kwj" > /root/.ssh/config \
     && chmod 644 /root/.ssh/config \
     && npm config set strict-ssl false \
-    && npm install -g websocketserver pm2 pnpm \
+    && npm install -g pnpm \
+    && pnpm install --prod \
+    && pnpm install -g websocketserver pm2 ts-node typescript tslib \
+    && rm -rf /root/.pnpm-store \
     && rm -rf /root/.npm \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
