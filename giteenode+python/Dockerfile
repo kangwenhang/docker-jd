@@ -35,6 +35,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              musl \
                              autoconf \ 
                              libtool \
+                             openssh \
                              openssl \
                              jq \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -48,9 +49,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && chmod 644 /root/.ssh/config \
     && npm config set strict-ssl false \
     && npm install -g pnpm \
-    && pnpm install --prod \
-    && pnpm install -g websocketserver pm2 ts-node typescript tslib \
-    && rm -rf /root/.pnpm-store \
     && rm -rf /root/.npm \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
