@@ -38,6 +38,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              openssh \
                              openssl \
                              jq \
+                             alpine-sdk \
+                             build-essential \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && pip --no-cache-dir install aiohttp requests wasmtime utils \
