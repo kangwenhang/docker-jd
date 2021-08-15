@@ -3,8 +3,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
     SHELL=/bin/bash \
-    JD_DIR=/jd \
-    QL_DIR=/ql \
     DEBIAN_FRONTEND=noninteractive \
     PS1="\u@\h:\w \$ "
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
