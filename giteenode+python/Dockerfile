@@ -1,4 +1,5 @@
 FROM node:lts-alpine
+LABEL maintainer="kangwenhang"
 ENV SHELL=/bin/bash \
     DEBIAN_FRONTEND=noninteractive
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
