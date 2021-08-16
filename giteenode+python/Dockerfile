@@ -37,6 +37,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              alpine-sdk \
                              build-essential \
                              python3 \
+                             python3-dev \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
