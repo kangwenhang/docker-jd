@@ -1,4 +1,4 @@
-FROM python:3.8.11-alpine3.13
+FROM node:lts-alpine
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -12,7 +12,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              build-essential \
                              libffi-dev \
                              tzdata \
-                             nodejs \
                              npm \
                              git \
                              wget \
@@ -37,6 +36,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              jq \
                              alpine-sdk \
                              build-essential \
+                             python3 \
+                             python3-pip \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && pip --no-cache-dir install aiohttp requests wasmtime utils \
@@ -46,4 +47,4 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && rm -rf /root/.npm \
     && rm -rf /tmp/* \
     && rm -rf /var/cache/apk/*
-WORKDIR /
+CMD ["/bin/bash"]
