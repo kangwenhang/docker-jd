@@ -27,6 +27,8 @@ RUN source ~/.bashrc \
     iproute2 \
     apt-utils \
     openssl \
+    node \
+    npm \
     bzip2 \
     sqlite \
     figlet \
@@ -44,11 +46,13 @@ RUN source ~/.bashrc \
 && echo "Asia/Shanghai" > /etc/timezone \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
-&& git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
+&& git clone -b master https://gitlab.com/Xtao-Labs/pagermaid-modify.git /pagermaid/workdir \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && cd /pagermaid/workdir \
+&& npm install -g pm2 \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+&& rm -rf /root/.npm \
 && apt-get clean \
 && apt-get autoclean \
 && rm -rf /var/lib/apt/lists/*
