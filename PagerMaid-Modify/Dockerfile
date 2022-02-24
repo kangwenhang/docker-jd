@@ -27,7 +27,7 @@ RUN source ~/.bashrc \
     iproute2 \
     apt-utils \
     openssl \
-    node \
+    nodejs \
     npm \
     bzip2 \
     sqlite \
