@@ -36,6 +36,7 @@ RUN source ~/.bashrc \
     curl \
     wget \
     sudo \
+    vim \
     libxml2-dev \
     libxslt1-dev \
     zlib1g-dev \

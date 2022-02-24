@@ -95,7 +95,7 @@ too() {
 start_installation() {
   if [ -f "/pagermaid/workdir/config/config.yml" -a -f "/pagermaid/workdir/config/pagermaid.session" ];then
     too
-    pm start redis-server &
+    pm2 start redis-server &
     python3 -m pagermaid
   else 
     welcome
