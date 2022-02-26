@@ -25,5 +25,5 @@ RUN source ~/.bashrc \
 && cp -r s6/* / \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && cd /pagermaid/workdir \
-&& pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt \
+&& pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 CMD ["sh","utils/docker-run.sh"]
