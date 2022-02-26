@@ -1,6 +1,4 @@
 FROM k1483162508/base:tgbase
-ARG S6_VERSION=v2.2.0.3
-ARG S6_ARCH=amd64
 ARG WORK_DIR=/pagermaid/workdir
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
