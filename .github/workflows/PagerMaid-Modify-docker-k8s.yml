@@ -2,7 +2,7 @@ name: "PagerMaid-Modify-docker-k8s"
 on:
   push:
     branches:
-      - dockerjs
+      - main
   workflow_dispatch:
   watch:
         types: [started]
