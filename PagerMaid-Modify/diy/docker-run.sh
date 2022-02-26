@@ -11,7 +11,6 @@ welcome() {
 configure() {
   cd /pagermaid/workdir
   config_file=/pagermaid/workdir/config/config.yml
-  echo "未检测到配置文件 . . ."
   echo "生成配置文件中 . . ."
   cp config.gen.yml /pagermaid/workdir/config/config.yml
   echo "api_key、api_hash 申请地址： https://my.telegram.org/"
@@ -82,26 +81,10 @@ login() {
   exit
 }
 
-too() {
-  echo "载入配置"
-  sleep 2
-  cp -rf /pagermaid/workdir/config/config.yml /pagermaid/workdir/config.yml
-  sleep 2
-  cp -rf /pagermaid/workdir/config/pagermaid.session /pagermaid/workdir/pagermaid.session
-  sleep 2
-  echo "载入完成"
-}
-
 start_installation() {
-  if [ -f "/pagermaid/workdir/config/config.yml" -a -f "/pagermaid/workdir/config/pagermaid.session" ];then
-    too
-    pm2 start redis-server &
-    python3 -m pagermaid
-  else 
-    welcome
-    configure
-    login
-  fi
+  welcome
+  configure
+  login
 }
 
 start_installation

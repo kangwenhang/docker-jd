@@ -17,7 +17,7 @@ RUN source ~/.bashrc \
 && mkdir -p /pagermaid/workdir \
 && git clone -b master https://gitlab.com/Xtao-Labs/pagermaid-modify.git /pagermaid/workdir \
 && git config --global pull.ff only \
-&& mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
+&& mv -f /root/diy/ /pagermaid/workdir/utils/ \
 && cd /pagermaid/workdir \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
-CMD ["/bin/bash"]
+CMD ["sh","utils/run.sh"]
