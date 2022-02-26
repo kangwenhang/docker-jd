@@ -20,4 +20,4 @@ RUN source ~/.bashrc \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && cd /pagermaid/workdir \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
-ENTRYPOINT ["/init"]
+CMD ["/bin/bash"]
