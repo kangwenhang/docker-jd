@@ -1,4 +1,4 @@
-name: "PagerMaid-Modify-docker-dev"
+name: "PagerMaid-Modify-docker-k8s"
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
   watch:
         types: [started]
   repository_dispatch:
-        types: build_image_telegram_dev
+        types: build_image_telegram_k8s
   
   
 jobs:
@@ -22,8 +22,8 @@ jobs:
         with:
           publish: true
           imageName: k1483162508/telegram
-          dockerFile: PagerMaid-Modify/Dockerfile
+          dockerFile: PagerMaid-Modify/k8s/Dockerfile
           platform: linux/amd64,linux/arm64
-          tag: dev
+          tag: k8s
           dockerUser: ${{ secrets.DOCKER_USERNAME }}
           dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
