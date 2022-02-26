@@ -1,4 +1,7 @@
 FROM ubuntu:latest
+ARG S6_VERSION=v2.2.0.3
+ARG S6_ARCH=amd64
+ARG WORK_DIR=/pagermaid/workdir
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -8,6 +11,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     RUN_AS_ROOT=true
 SHELL ["/bin/bash", "-c"]
 COPY /PagerMaid-Modify/diy/ /root/diy/
+WORKDIR $WORK_DIR
 RUN source ~/.bashrc \
 && apt-get update \
 && apt-get install -y tzdata \
@@ -47,7 +51,12 @@ RUN source ~/.bashrc \
 && echo "Asia/Shanghai" > /etc/timezone \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
+&& curl -L -o /tmp/s6-overlay-installer https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-${S6_ARCH}-installer \
+&& chmod +x /tmp/s6-overlay-installer \
+&& /tmp/s6-overlay-installer / \
 && git clone -b master https://gitlab.com/Xtao-Labs/pagermaid-modify.git /pagermaid/workdir \
+&& git config --global pull.ff only \
+&& cp -r s6/* / \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && cd /pagermaid/workdir \
 && npm install -g pm2 \
@@ -57,5 +66,4 @@ RUN source ~/.bashrc \
 && apt-get clean \
 && apt-get autoclean \
 && rm -rf /var/lib/apt/lists/*
-WORKDIR /pagermaid/workdir
 CMD ["sh","utils/docker-run.sh"]
