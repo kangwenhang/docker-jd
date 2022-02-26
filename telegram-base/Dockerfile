@@ -44,7 +44,6 @@ RUN source ~/.bashrc \
     gcc \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
-&& cd /pagermaid/workdir \
 && npm install -g pm2 \
 && rm -rf /root/.npm \
 && apt-get clean \
