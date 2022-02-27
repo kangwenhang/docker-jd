@@ -72,8 +72,8 @@ configure() {
 login() {
   echo ""
   echo "下面进行程序运行。"
-  echo "请在账户授权完毕后，按 Ctrl + C 退出配置界面并重启容器或者pagermaid。"
-  echo "重启命令为docker restartr XXX"
+  echo "注意：请在账户授权完毕后，按 Ctrl + C 退出配置界面并重启容器pagermaid。"
+  echo "重启命令为docker restart 容器名称"
   echo ""
   sleep 2
   python3 -m pagermaid
