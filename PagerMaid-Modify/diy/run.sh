@@ -20,4 +20,6 @@ else
   echo "容器内：bash /pagermaid/workdir/utils/docker-run.sh"
 fi
 
+tail -f /dev/null
+
 exec "$@"
