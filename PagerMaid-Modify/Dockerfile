@@ -1,5 +1,4 @@
 FROM k1483162508/base:tgbase
-ARG WORK_DIR=/pagermaid/workdir
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -9,7 +8,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     RUN_AS_ROOT=true
 SHELL ["/bin/bash", "-c"]
 COPY /PagerMaid-Modify/diy/ /root/diy/
-WORKDIR $WORK_DIR
 RUN source ~/.bashrc \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
@@ -21,4 +19,5 @@ RUN source ~/.bashrc \
 && mv -f /root/diy/run.sh /pagermaid/workdir/utils/run.sh \
 && cd /pagermaid/workdir \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
+WORKDIR /pagermaid/workdir
 CMD ["sh","utils/run.sh"]
