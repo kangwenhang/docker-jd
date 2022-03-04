@@ -12,11 +12,12 @@ configure() {
   cd /pagermaid/workdir
   config_file=/pagermaid/workdir/config/config.yml
   if [ -e "$config_file" ];then
+    cp -rf $config_file /pagermaid/workdir/config.yml
     echo "配置文件存在，跳过此引导，进行下一步"
     return
   else
     echo "配置文件不存在，生成配置文件中 . . ."
-    cp config.gen.yml /pagermaid/workdir/config/config.yml
+    cp config.gen.yml $config_file
     echo "api_key、api_hash 申请地址： https://my.telegram.org/"
     printf "请输入应用程序 api_key："
     read -r api_key <&1
