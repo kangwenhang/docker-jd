@@ -11,7 +11,7 @@ welcome() {
 configure() {
   cd /pagermaid/workdir
   config_file=/pagermaid/workdir/config/config.yml
-  if [ -e "config_file" ];then
+  if [ -e "$config_file" ];then
     echo "配置文件存在，跳过此引导，进行下一步"
     return
   else
