@@ -62,11 +62,11 @@ configure() {
           sed -i "s/503691334/$log_chatid/" $config_file
         fi
         sed -i "s/log: False/log: True/" $config_file
-        cp -rf $config_fil /pagermaid/workdir/config.yml
+        cp -rf $config_file /pagermaid/workdir/config.yml
         ;;
       [nN][oO]|[nN])
         echo "安装过程继续 . . ."
-        cp -rf $config_fil /pagermaid/workdir/config.yml
+        cp -rf $config_file /pagermaid/workdir/config.yml
         ;;
       *)
         echo "输入错误 . . ."
