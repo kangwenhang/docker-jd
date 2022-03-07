@@ -1,0 +1,29 @@
+FROM node:15.9.0-alpine3.12
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    LANG=zh_CN.UTF-8 \
+    LC_ALL=C \
+    SHELL=/bin/bash \
+    PS1="\u@\h:\w \$ " \
+    DEBIAN_FRONTEND=noninteractive \
+    RUN_AS_ROOT=true
+SHELL ["/bin/bash", "-c"]
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk update -f \
+    && apk upgrade \
+    && apk --no-cache add -f bash \
+                             coreutils \
+                             moreutils \
+                             git \
+                             wget \
+                             curl \
+                             nano \
+                             tzdata \
+                             perl \
+                             openssl \
+                             openssh \
+    && rm -rf /var/cache/apk/* \
+    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && npm install -g pm2 \
+    && rm -rf /root/.npm
+CMD ["/bin/bash"]
