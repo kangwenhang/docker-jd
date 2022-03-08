@@ -1,4 +1,4 @@
-FROM node:15.9.0-alpine3.12
+FROM alpine:3.15.0
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -13,6 +13,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk --no-cache add -f bash \
                              coreutils \
                              moreutils \
+                             nodejs \
+                             npm \
                              git \
                              wget \
                              curl \
