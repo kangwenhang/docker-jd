@@ -3,10 +3,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
     SHELL=/bin/bash \
-    PS1="\u@\h:\w \$ " \
-    DEBIAN_FRONTEND=noninteractive \
-    RUN_AS_ROOT=true
-SHELL ["/bin/bash", "-c"]
+    PS1="\u@\h:\w \$ " 
 COPY /sillyGirl/diy/ /root/diy/
 RUN source ~/.bashrc \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -18,4 +15,4 @@ RUN source ~/.bashrc \
 && mv -f /root/diy/run.sh /sillyGirl/run.sh \
 && chmod 777 sillyGirl 
 WORKDIR /sillyGirl
-CMD ["sh","run.sh"]
+CMD ["/bin/bash","run.sh"]
