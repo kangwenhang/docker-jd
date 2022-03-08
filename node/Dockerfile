@@ -5,7 +5,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive \
     RUN_AS_ROOT=true
-SHELL ["/bin/bash", "-c"]
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update -f \
     && apk upgrade \
