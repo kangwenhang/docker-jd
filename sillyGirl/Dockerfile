@@ -5,8 +5,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " 
 COPY /sillyGirl/diy/ /root/diy/
-RUN source ~/.bashrc \
-&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
 && mkdir -p /sillyGirl \
 && if [[ $(uname -a | grep "x86_64") != "" ]] ; then a=amd64 ; else a=arm64 ; fi \
@@ -15,4 +14,4 @@ RUN source ~/.bashrc \
 && mv -f /root/diy/run.sh /sillyGirl/run.sh \
 && chmod 777 sillyGirl 
 WORKDIR /sillyGirl
-CMD ["/bin/bash","run.sh"]
+CMD ["sh","run.sh"]
