@@ -12,6 +12,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && wget https://github.com/cdle/sillyGirl/releases/download/main/sillyGirl_linux_$a -O /sillyGirl/sillyGirl  \
 && mv -f /root/diy/sets.conf.sample /sillyGirl/sets.conf.sample \
 && mv -f /root/diy/run.sh /sillyGirl/run.sh \
-&& chmod 777 sillyGirl 
+&& chmod -R 777 /sillyGirl 
 WORKDIR /sillyGirl
 CMD ["sh","run.sh"]
