@@ -6,7 +6,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive \
     RUN_AS_ROOT=true
-RUN SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/bash", "-c"]
 RUN source ~/.bashrc \
 && apt-get update \
 && apt-get install -y tzdata \
