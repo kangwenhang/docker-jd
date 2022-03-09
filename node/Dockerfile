@@ -1,29 +1,29 @@
-FROM alpine:3.15.0
+FROM ubuntu:latest
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
+    SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive \
     RUN_AS_ROOT=true
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && apk update -f \
-    && apk upgrade \
-    && apk --no-cache add -f bash \
-                             coreutils \
-                             moreutils \
-                             nodejs \
-                             npm \
-                             git \
-                             wget \
-                             curl \
-                             nano \
-                             tzdata \
-                             perl \
-                             openssl \
-                             openssh \
-    && rm -rf /var/cache/apk/* \
-    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone \
-    && npm install -g pm2 \
-    && rm -rf /root/.npm
+RUN SHELL ["/bin/bash", "-c"]
+RUN source ~/.bashrc \
+&& apt-get update \
+&& apt-get install -y tzdata \
+                      openssl \
+                      net-tools \
+                      nodejs \
+                      npm \
+                      vim \    
+                      curl \
+                      wget \
+                      sudo \
+&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+&& echo "Asia/Shanghai" > /etc/timezone \
+&& npm config set strict-ssl false \
+&& npm install -g pm2 \
+&& rm -rf /root/.npm \
+&& apt-get clean \
+&& apt-get autoclean \
+&& rm -rf /var/lib/apt/lists/*
 CMD ["/bin/bash"]
