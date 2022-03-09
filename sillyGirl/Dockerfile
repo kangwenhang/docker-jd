@@ -8,6 +8,7 @@ COPY /sillyGirl/diy/ /root/diy/
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
 && mkdir -p /sillyGirl \
+&& mkdir -p /etc/sillyGirl \
 && if [[ $(uname -a | grep "x86_64") != "" ]] ; then a=amd64 ; else a=arm64 ; fi \
 && wget https://github.com/cdle/sillyGirl/releases/download/main/sillyGirl_linux_$a -O /sillyGirl/sillyGirl  \
 && mv -f /root/diy/sets.conf.sample /sillyGirl/sets.conf.sample \
