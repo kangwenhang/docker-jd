@@ -18,6 +18,7 @@ RUN source ~/.bashrc \
                       curl \
                       wget \
                       sudo \
+                      p7zip-full \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
 && npm config set strict-ssl false \
