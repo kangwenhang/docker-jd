@@ -3,7 +3,7 @@
 too1() {
   echo "运行完成后，请进入数据面板配置相关参数，地址：Http://傻妞地址/admin"
   echo "初始用户名：admin"
-  echo "初始密码：admin"
+  echo "初始密码：admin  ，请去config文件夹下修改密码（变量名为set sillyGirl adminPassword）"
   echo "完成后请重启容器，命令：docker restart 容器名称"
   sleep 5
   ./sillyGirl -t
