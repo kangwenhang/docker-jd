@@ -1,4 +1,5 @@
 #!/bin/bash
+
 too1() {
   echo "运行完成后，请进入数据面板配置相关参数，地址：Http://傻妞地址/admin"
   echo "初始用户名：admin"
