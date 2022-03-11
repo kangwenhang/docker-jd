@@ -16,14 +16,21 @@ if [ -f "/etc/sillyGirl/sets.conf" -a -f "/etc/sillyGirl/sillyGirl.cache" ];then
   pm2 log
 else 
   echo "未检测到配置文件，请先自行配置相关设置参数，开始首次运行傻妞"
-  if [ "`ls -A /sillyGirl/plugin/web/admin/`" = "" ]; then
-    echo "数据web管理插件存在，跳过安装"
-    too
-  else
+  if [ ! -d "/sillyGirl/plugin/web/admin/" ];then
     echo "数据web管理插件不存在，开始安装"
     7za x /sillyGirl/admin.zip -r -o/sillyGirl/plugin/web/admin/
     echo "数据web管理插件安装成功"
     too
+  else
+    if [ "`ls -A /sillyGirl/plugin/web/admin/`" = "" ]; then
+      echo "数据web管理插件存在，但为空"
+      7za x /sillyGirl/admin.zip -r -o/sillyGirl/plugin/web/admin/
+      echo "数据web管理插件安装成功"
+      too
+    else
+      echo "数据web管理插件存在，跳过安装"
+      too
+    fi
   fi
 fi
 
