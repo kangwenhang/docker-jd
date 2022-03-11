@@ -26,8 +26,6 @@ too() {
       too1
     fi
   fi
-
-
 }
 
 if [ -f "/etc/sillyGirl/sets.conf" -a -f "/etc/sillyGirl/sillyGirl.cache" ];then
