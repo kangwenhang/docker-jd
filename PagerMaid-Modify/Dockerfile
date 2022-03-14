@@ -12,7 +12,6 @@ RUN source ~/.bashrc \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
-&& sudo echo never>/sys/kernel/mm/transparent_hugepage/enabled \
 && mkdir -p /pagermaid/workdir \
 && git clone -b master https://gitlab.com/Xtao-Labs/pagermaid-modify.git /pagermaid/workdir \
 && git config --global pull.ff only \
