@@ -45,7 +45,7 @@ RUN source ~/.bashrc \
 && echo "Asia/Shanghai" > /etc/timezone \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
-&& pip3 install socksio python-binance xmltodict \
+&& pip3 install socksio python-binance xmltodict jieba\
 && rm -rf /root/.npm \
 && apt-get clean \
 && apt-get autoclean \
