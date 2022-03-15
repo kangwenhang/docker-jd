@@ -17,6 +17,7 @@ RUN source ~/.bashrc \
 && git config --global pull.ff only \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && mv -f /root/diy/run.sh /pagermaid/workdir/utils/run.sh \
+&& cp /home/redis.conf /pagermaid/workdir/redis.conf \
 && cd /pagermaid/workdir \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 WORKDIR /pagermaid/workdir

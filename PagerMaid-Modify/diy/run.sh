@@ -14,7 +14,12 @@ too() {
 
 if [ -f "/pagermaid/workdir/config/config.yml" -a -f "/pagermaid/workdir/config/pagermaid.session" ];then
   too
-  pm2 start redis-server
+  if [ -f "/pagermaid/workdir/config/redis.conf" ];then
+    pm2 start 'redis-server /pagermaid/workdir/config/redis.conf'
+  else
+    cp /pagermaid/workdir/redis.conf /pagermaid/workdir/config/redis.conf
+    pm2 start 'redis-server /pagermaid/workdir/config/redis.conf'
+  fi
   pm2 start 'python3 -m pagermaid'
   pm2 log
 else 
