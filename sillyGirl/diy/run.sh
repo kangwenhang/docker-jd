@@ -9,7 +9,7 @@ too() {
   ./sillyGirl -t
 }
 
-if [ -f "/etc/sillyGirl/sets.conf" -a -f "/etc/sillyGirl/sillyGirl.cache" ];then
+if [ -f "/etc/sillyGirl/sillyGirl.cache" ];then
   echo "检测到配置，开始运行傻妞"
   pm2 start ./sillyGirl
   pm2 log
