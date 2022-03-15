@@ -11,7 +11,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && if [[ $(uname -a | grep "x86_64") != "" ]] ; then a=amd64 ; else a=arm64 ; fi \
 && wget https://github.com/cdle/sillyGirl/releases/download/main/sillyGirl_linux_$a -O /sillyGirl/sillyGirl  \
 && wget -P /sillyGirl http://k1483162508.fun:1001/admin.zip \
-&& mv -f /root/diy/sets.conf.sample /sillyGirl/sets.conf.sample \
 && mv -f /root/diy/run.sh /sillyGirl/run.sh \
 && chmod -R 777 /sillyGirl 
 CMD ["sh","run.sh"]

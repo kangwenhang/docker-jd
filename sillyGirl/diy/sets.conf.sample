@@ -1,6 +1,0 @@
-set sillyGirl enable_http_server true
-set sillyGirl port 8080
-set sillyGirl duration 20
-set sillyGirl update_notify true
-set sillyGirl auto_update false
-set sillyGirl adminPassword admin
