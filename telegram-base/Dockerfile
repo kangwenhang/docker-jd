@@ -41,8 +41,16 @@ RUN source ~/.bashrc \
     libevent-dev \
     libffi-dev \
     gcc \
+    make \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
+&& wget -O /home/redis-stable.tar.gz http://download.redis.io/redis-stable.tar.gz \
+&& cd /home \
+&& tar -zxvf redis-stable.tar.gz \
+&& mv redis-stable /home/redis \
+&& cd /home/redis \
+&& make \
+&& make install \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
