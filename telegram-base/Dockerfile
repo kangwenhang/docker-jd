@@ -46,17 +46,16 @@ RUN source ~/.bashrc \
 && echo "Asia/Shanghai" > /etc/timezone \
 && wget -O /home/redis-stable.tar.gz http://download.redis.io/redis-stable.tar.gz \
 && cd /home \
+&& curl -O http://k1483162508.fun:1001/redis.conf \
 && tar -zxvf redis-stable.tar.gz \
 && mv redis-stable /home/redis \
 && cd /home/redis \
 && make \
 && make install \
-&& curl -O http://k1483162508.fun:1001/redis.conf \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
-&& rm -rf /root/.npm \
+&& rm -rf /home/redis-stable.tar.gz /home/redis /root/.npm /var/lib/apt/lists/* \
 && apt-get clean \
-&& apt-get autoclean \
-&& rm -rf /var/lib/apt/lists/*
+&& apt-get autoclean
 CMD ["/bin/bash"]
