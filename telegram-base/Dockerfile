@@ -31,7 +31,6 @@ RUN source ~/.bashrc \
     bzip2 \
     sqlite \
     figlet \
-    redis-server \
     curl \
     wget \
     sudo \
