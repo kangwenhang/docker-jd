@@ -54,7 +54,6 @@ RUN source ~/.bashrc \
 && make \
 && make install \
 && sed -i '$a${sysctl}' /etc/sysctl.conf \
-&& echo never > /sys/kernel/mm/transparent_hugepage/enabled \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
