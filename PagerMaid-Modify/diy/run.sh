@@ -7,6 +7,10 @@ too() {
   sleep 2
   cp -rf /pagermaid/workdir/config/pagermaid.session /pagermaid/workdir/pagermaid.session
   sleep 2
+  sysctl="net.core.somaxconn = 1024\nvm.overcommit_memory = 1"
+  sleep 2
+  sed -i '$a${sysctl}' /etc/sysctl.conf
+  sleep 2
   echo never > /sys/kernel/mm/transparent_hugepage/enabled
   sleep 2
   echo "载入完成"
