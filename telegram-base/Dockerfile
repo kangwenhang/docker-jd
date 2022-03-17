@@ -6,7 +6,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive \
     RUN_AS_ROOT=true
-ARG sysctl="net.core.somaxconn = 1024\nvm.overcommit_memory = 1"
 SHELL ["/bin/bash", "-c"]
 RUN source ~/.bashrc \
 && apt-get update \
@@ -53,7 +52,6 @@ RUN source ~/.bashrc \
 && cd /home/redis \
 && make \
 && make install \
-&& sed -i '$a${sysctl}' /etc/sysctl.conf \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
