@@ -8,6 +8,8 @@ too() {
   cp -rf /pagermaid/workdir/config/pagermaid.session /pagermaid/workdir/pagermaid.session
   sleep 2
   echo never > /sys/kernel/mm/transparent_hugepage/enabled
+  echo 511 > /proc/sys/net/core/somaxconn
+  echo 1 > /proc/sys/vm/overcommit_memory
   sleep 2
   echo "载入完成"
 }
