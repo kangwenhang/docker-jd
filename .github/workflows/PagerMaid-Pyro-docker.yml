@@ -1,4 +1,4 @@
-name: "PagerMaid-Modify-docker"
+name: "PagerMaid-Pyro-docker"
 on:
   push:
     branches:
