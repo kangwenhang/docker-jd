@@ -1,5 +1,7 @@
 #!/bin/bash
 
+$botqq=
+
 too() {
   echo "运行完成后，请进入数据面板配置相关参数，地址：Http://傻妞地址/admin"
   echo "初始用户名：admin"
@@ -9,13 +11,29 @@ too() {
   ./sillyGirl -t
 }
 
-if [ -f "/etc/sillyGirl/sillyGirl.cache" ];then
+oicq() {
+  if [ $oicqbot = "true" ]; then
+    if [ -f "/root/.oicq/config.js" ]; then
+      echo "开始生成默认配置文件"
+      cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
+      echo "生成完成，请修改配置文件后重启容器。重启命令：docker restart 容器名称"
+    else
+      echo "检测到配置文件，开始启动qqbot"
+      cd /root/.oicq/
+      pm2 satrt "oicq $botqq"
+    fi
+  else
+
+  fi
+}
+
+if [ -f "/etc/sillyGirl/sillyGirl.cache" ]; then
   echo "检测到配置，开始运行傻妞"
   pm2 start ./sillyGirl
   pm2 log
 else 
   echo "未检测到配置文件，请先自行配置相关设置参数，开始首次运行傻妞"
-  if [ ! -d "/sillyGirl/plugin/web/admin/" ];then
+  if [ ! -d "/sillyGirl/plugin/web/admin/" ]; then
     echo "数据web管理插件不存在，开始安装"
     7za x /sillyGirl/admin.zip -r -o/sillyGirl/plugin/web/admin/
     echo "数据web管理插件安装成功"
