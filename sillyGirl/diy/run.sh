@@ -1,7 +1,5 @@
 #!/bin/bash
 
-$botqq=
-
 too() {
   echo "运行完成后，请进入数据面板配置相关参数，地址：Http://傻妞地址/admin"
   echo "初始用户名：admin"
@@ -19,14 +17,21 @@ oicq() {
       echo "生成完成，请修改配置文件后重启容器。重启命令：docker restart 容器名称"
     else
       echo "检测到配置文件，开始启动qqbot"
+      echo "自动匹配到如下QQ号"
+      grep -oP '[1-9][0-9]{4,10}:' /root/.oicq/config.js 2>&1 | tee /sillyGirl/qq.log >/dev/null 2>&1
+      sed -i 's/://g' /sillyGirl/qq.log
+      cat /sillyGirl/qq.log
+      echo "开始启动oicq"
+      $botqq=$(cat /sillyGirl/qq.log)
       cd /root/.oicq/
       pm2 satrt "oicq $botqq"
     fi
   else
-
+    echo "已选择不开启oicq"
   fi
 }
 
+oicq
 if [ -f "/etc/sillyGirl/sillyGirl.cache" ]; then
   echo "检测到配置，开始运行傻妞"
   pm2 start ./sillyGirl
