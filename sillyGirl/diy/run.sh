@@ -21,7 +21,7 @@ oicq() {
       echo "开始启动oicq"
       $botqq=$(cat /sillyGirl/qq.log)
       cd /root/.oicq/
-      pm2 satrt "oicq $botqq"
+      pm2 start "oicq $botqq"
     else
       echo "开始生成默认配置文件"
       cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
