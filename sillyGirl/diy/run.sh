@@ -6,16 +6,13 @@ too() {
   echo "初始密码：随机，请查看日志"
   echo "完成后请重启容器，命令：docker restart 容器名称"
   sleep 5
+  cd /sillyGirl
   ./sillyGirl -t
 }
 
 oicq() {
   if [ $oicqbot = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
-      echo "开始生成默认配置文件"
-      cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
-      echo "生成完成，请修改配置文件后重启容器。重启命令：docker restart 容器名称"
-    else
       echo "检测到配置文件，开始启动qqbot"
       echo "自动匹配到如下QQ号"
       grep -oP '[1-9][0-9]{4,10}:' /root/.oicq/config.js 2>&1 | tee /sillyGirl/qq.log >/dev/null 2>&1
@@ -25,6 +22,10 @@ oicq() {
       $botqq=$(cat /sillyGirl/qq.log)
       cd /root/.oicq/
       pm2 satrt "oicq $botqq"
+    else
+      echo "开始生成默认配置文件"
+      cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
+      echo "生成完成，请修改配置文件后重启容器。重启命令：docker restart 容器名称"
     fi
   else
     echo "已选择不开启oicq"
@@ -34,6 +35,7 @@ oicq() {
 oicq
 if [ -f "/etc/sillyGirl/sillyGirl.cache" ]; then
   echo "检测到配置，开始运行傻妞"
+  cd /sillyGirl
   pm2 start ./sillyGirl
   pm2 log
 else 
