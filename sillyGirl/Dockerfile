@@ -16,4 +16,4 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && mv -f /root/diy/docker-run.sh /sillyGirl/docker-run.sh \
 && mv -f /root/diy/config.js.sample /sillyGirl/config.js.sample \
 && chmod -R 777 /sillyGirl 
-CMD ["sh","run.sh"]
+CMD ["bash","run.sh"]
