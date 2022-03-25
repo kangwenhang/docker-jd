@@ -14,7 +14,7 @@ oicq_bot () {
         cat /sillyGirl/qq.log
         botqq=$(cat /sillyGirl/qq.log)
         if [ -d "/root/.oicq/$botqq/token" ]; then
-          echo "开始启动oicq"
+          echo "开始启动OICQ"
           pm2 start "oicq $botqq"
           return
         else
@@ -28,7 +28,7 @@ oicq_bot () {
       echo "容器内：bash /sillyGirl/docker-run.sh"
     fi
   else
-    echo "已选择不开启oicq"
+    echo "已选择不开启OICQ"
   fi
 }
 

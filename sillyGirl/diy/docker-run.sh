@@ -24,7 +24,7 @@ fi
 oicq_bot() {
   if [ $oicqbot = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
-      echo "检测到配置文件，首次启动oicq进行确认"
+      echo "检测到配置文件，首次启动OICQ进行确认"
       echo "自动匹配到如下QQ号"
       grep -oP '[1-9][0-9]{4,10}:' /root/.oicq/config.js 2>&1 | tee /sillyGirl/qq.log >/dev/null 2>&1
       sed -i 's/://g' /sillyGirl/qq.log
@@ -32,12 +32,12 @@ oicq_bot() {
       botqq=$(cat /sillyGirl/qq.log)
       one
     else
-      echo "未检测到配置文件，开始生成默认配置文件"
+      echo "OICQ未检测到配置文件，开始生成默认配置文件"
       cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
-      echo "生成完成，请自行修改配置文件"
+      echo "OICQ配置文件生成完成，请自行修改配置文件"
     fi
   else
-    echo "已选择不开启oicq"
+    echo "已选择不开启OICQ"
   fi
 }
 
