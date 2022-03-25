@@ -24,9 +24,7 @@ oicq() {
         cat /sillyGirl/qq.log
         botqq=$(cat /sillyGirl/qq.log)
         echo "开始启动oicq"
-        cd /root/.oicq/
         oicq $botqq
-        fi
       fi
     else
       echo "未检测到配置文件，开始生成默认配置文件"
@@ -45,10 +43,8 @@ if [ -d "/sillyGirl/plugin/web/admin/" ] && [ ! "`ls -A /sillyGirl/plugin/web/ad
 else
   echo "数据web管理插件不存在，开始安装"
   7za x /sillyGirl/admin.zip -r -o/sillyGirl/plugin/web/admin/
+  chmod -R 777 /sillyGirl/plugin/web/admin/
   echo "数据web管理插件安装成功"
   too
 fi
 
-tail -f /dev/null
-
-exec "$@"

@@ -13,9 +13,8 @@ oicq() {
         sed -i 's/://g' /sillyGirl/qq.log
         cat /sillyGirl/qq.log
         botqq=$(cat /sillyGirl/qq.log)
-        if [ -d "/root/.oicq/$botqq" ]; then
+        if [ -d "/root/.oicq/$botqq/token" ]; then
           echo "开始启动oicq"
-          cd /root/.oicq/
           pm2 start "oicq $botqq"
         else
           echo "登录信息不存在，请检查登录信息"
@@ -42,6 +41,7 @@ if [ -f "/etc/sillyGirl/sillyGirl.cache" ]; then
   else
     echo "面板异常，开始恢复面板"
     7za x /sillyGirl/admin.zip -r -o/sillyGirl/plugin/web/admin/
+    chmod -R 777 /sillyGirl/plugin/web/admin/
     echo "面板恢复成功，开始启动傻妞"
     cd /sillyGirl
     pm2 start ./sillyGirl
