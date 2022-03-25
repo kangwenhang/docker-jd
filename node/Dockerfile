@@ -12,7 +12,7 @@ RUN source ~/.bashrc \
 && apt-get install -y tzdata \
                       openssl \
                       net-tools \
-                      nodejs-legacy \
+                      nodejs \
                       npm \
                       vim \    
                       curl \
