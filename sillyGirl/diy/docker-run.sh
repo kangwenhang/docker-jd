@@ -10,6 +10,15 @@ function too {
   ./sillyGirl -t
 }
 
+function one {
+if [ $botqq = "" ]; then
+  echo "错误！未检测到QQ号，请确认配置是否已填写"
+else
+  echo '开始启动qqbot'
+  oicq $botqq
+fi
+}
+
 function oicq {
   if [ $oicqbot = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
@@ -19,12 +28,7 @@ function oicq {
       sed -i 's/://g' /sillyGirl/qq.log
       cat /sillyGirl/qq.log
       botqq=$(cat /sillyGirl/qq.log)
-      if [ $botqq = "" ]; then
-        echo "错误！未检测到QQ号，请确认配置是否已填写"
-      else
-        echo "开始启动oicq"
-        oicq $botqq
-      fi
+      one
     else
       echo "未检测到配置文件，开始生成默认配置文件"
       cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
