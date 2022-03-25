@@ -12,14 +12,8 @@ too() {
 }
 
 one() {
-if [ $botqq = "" ]; then
-  echo "错误！未检测到QQ号，请确认配置是否已填写"
-  return
-else
   echo '开始启动qqbot'
   oicq $botqq
-  return
-fi
 }
 
 oicq_bot() {
@@ -31,7 +25,12 @@ oicq_bot() {
       sed -i 's/://g' /sillyGirl/qq.log
       cat /sillyGirl/qq.log
       botqq=$(cat /sillyGirl/qq.log)
-      one
+      if [ ! $botqq = "" ] && [ -d "/root/.oicq/$botqq/token" ]; then
+        echo "开始启动OICQ"
+        one
+      else
+        echo "登录信息不存在，请检查登录信息"
+      fi
     else
       echo "OICQ未检测到配置文件，开始生成默认配置文件"
       cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
