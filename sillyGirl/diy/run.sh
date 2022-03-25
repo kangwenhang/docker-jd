@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function oicq {
+function oicq_bot {
   if [ $oicqbot = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
       echo "检测到配置文件，开始启动qqbot"
@@ -16,6 +16,7 @@ function oicq {
         if [ -d "/root/.oicq/$botqq/token" ]; then
           echo "开始启动oicq"
           pm2 start "oicq $botqq"
+          return
         else
           echo "登录信息不存在，请检查登录信息"
           return
@@ -31,7 +32,7 @@ function oicq {
   fi
 }
 
-oicq
+oicq_bot
 if [ -f "/etc/sillyGirl/sillyGirl.cache" ]; then
   if [ -d "/sillyGirl/plugin/web/admin/" ] && [ ! "`ls -A /sillyGirl/plugin/web/admin/`" = "" ]; then
     echo "检测到配置，开始运行傻妞"

@@ -13,13 +13,15 @@ function too {
 function one {
 if [ $botqq = "" ]; then
   echo "错误！未检测到QQ号，请确认配置是否已填写"
+  return
 else
   echo '开始启动qqbot'
   oicq $botqq
+  return
 fi
 }
 
-function oicq {
+function oicq_bot {
   if [ $oicqbot = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
       echo "检测到配置文件，首次启动oicq进行确认"
@@ -39,7 +41,7 @@ function oicq {
   fi
 }
 
-oicq
+oicq_bot
 if [ -d "/sillyGirl/plugin/web/admin/" ] && [ ! "`ls -A /sillyGirl/plugin/web/admin/`" = "" ]; then
   echo "数据web管理插件存在，跳过安装"
   too
