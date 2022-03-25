@@ -32,7 +32,11 @@ oicq_bot () {
   fi
 }
 
+echo -e "\n=============================OICQ配置===================================\n"
 oicq_bot
+echo -e "\n=============================OICQ配置===================================\n"
+
+echo -e "\n=============================傻妞配置===================================\n"
 if [ -f "/etc/sillyGirl/sillyGirl.cache" ]; then
   if [ -d "/sillyGirl/plugin/web/admin/" ] && [ ! "`ls -A /sillyGirl/plugin/web/admin/`" = "" ]; then
     echo "检测到配置，开始运行傻妞"
@@ -53,6 +57,7 @@ else
   echo "容器外：docker exec -it 容器名称 bash /sillyGirl/docker-run.sh"
   echo "容器内：bash /sillyGirl/docker-run.sh"
 fi
+echo -e "\n=============================傻妞配置===================================\n"
 
 tail -f /dev/null
 
