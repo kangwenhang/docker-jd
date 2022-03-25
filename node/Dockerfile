@@ -21,8 +21,8 @@ RUN source ~/.bashrc \
                       p7zip-full \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
-&& npm install npm@latest -g \
 && npm config set strict-ssl false \
+&& npm install npm@latest -g \
 && npm install -g pm2 n \
 && n stable \
 && rm -rf /root/.npm \
