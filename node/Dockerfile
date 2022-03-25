@@ -23,8 +23,8 @@ RUN source ~/.bashrc \
 && echo "Asia/Shanghai" > /etc/timezone \
 && npm install npm@latest -g \
 && npm config set strict-ssl false \
-&& npm install -g pm2 \
-&& sudo n stable \
+&& npm install -g pm2 n \
+&& n stable \
 && rm -rf /root/.npm \
 && apt-get clean \
 && apt-get autoclean \
