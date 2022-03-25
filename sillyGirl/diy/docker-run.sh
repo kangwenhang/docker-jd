@@ -35,6 +35,7 @@ oicq_bot() {
       echo "OICQ未检测到配置文件，开始生成默认配置文件"
       cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
       echo "OICQ配置文件生成完成，请自行修改配置文件"
+    fi
   else
     echo "已选择不开启OICQ"
   fi
