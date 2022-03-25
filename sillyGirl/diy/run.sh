@@ -1,12 +1,12 @@
 #!/bin/bash
 
-function oicq_bot {
+oicq_bot () {
   if [ $oicqbot = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
       echo "检测到配置文件，开始启动qqbot"
       echo "自动匹配到如下QQ号"
       grep -oP '[1-9][0-9]{4,10}:' /root/.oicq/config.js 2>&1 | tee /sillyGirl/qq.log >/dev/null 2>&1
-      if [[ `cat /sillyGirl/qq.log |wc -l` -eq 0 ]]; then
+      if [[ `cat /sillyGirl/qq.log | wc -l` -eq 0 ]]; then
         echo "错误！未检测到QQ号，请确认配置是否已填写"
         return
       else

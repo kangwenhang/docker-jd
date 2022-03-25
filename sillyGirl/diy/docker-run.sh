@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function too {
+too() {
   echo "运行完成后，请进入数据面板配置相关参数，地址：Http://傻妞地址/admin"
   echo "初始用户名：admin"
   echo "初始密码：随机，请查看日志"
@@ -10,7 +10,7 @@ function too {
   ./sillyGirl -t
 }
 
-function one {
+one() {
 if [ $botqq = "" ]; then
   echo "错误！未检测到QQ号，请确认配置是否已填写"
   return
@@ -21,7 +21,7 @@ else
 fi
 }
 
-function oicq_bot {
+oicq_bot() {
   if [ $oicqbot = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
       echo "检测到配置文件，首次启动oicq进行确认"
