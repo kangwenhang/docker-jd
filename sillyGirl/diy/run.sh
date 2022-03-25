@@ -19,6 +19,7 @@ oicq_bot () {
           return
         else
           echo "登录信息不存在，请检查登录信息"
+          echo "运行：bash /sillyGirl/docker-run.sh 进行配置"
           return
         fi
       fi

@@ -26,15 +26,16 @@ oicq_bot() {
       cat /sillyGirl/qq.log
       botqq=$(cat /sillyGirl/qq.log)
       if [ ! $botqq = "" ] && [ -d "/root/.oicq/$botqq/token" ]; then
-        echo "开始启动OICQ"
-        one
+        echo "配置信息存在。跳过此项部署"
       else
-        echo "登录信息不存在，请检查登录信息"
+        echo "登录信息不存在，开始启动OICQ"
+        one
       fi
     else
       echo "OICQ未检测到配置文件，开始生成默认配置文件"
       cp -rf /sillyGirl/config.js.sample /root/.oicq/config.js
-      echo "OICQ配置文件生成完成，请自行修改配置文件"
+      echo "OICQ配置文件生成完成，请自行修改配置文件。文件地址：映射地址oicq"
+      echo "修改完成后继续运行：bash /sillyGirl/docker-run.sh 此命令"
     fi
   else
     echo "已选择不开启OICQ"
