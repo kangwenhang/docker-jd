@@ -13,6 +13,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && npm i -g oicq@1 \
 && wget -P /sillyGirl http://k1483162508.fun:1001/admin.zip \
 && mv -f /root/diy/run.sh /sillyGirl/run.sh \
+&& mv -f /root/diy/run.sh /sillyGirl/docker-run.sh \
 && mv -f /root/diy/config.js.sample /sillyGirl/config.js.sample \
 && chmod -R 777 /sillyGirl 
 CMD ["sh","run.sh"]
