@@ -23,7 +23,7 @@ oicq() {
         fi
       fi
     else
-      echo "未检测到配置文件，请使用命令："
+      echo "OICQ未检测到配置文件，请使用命令："
       echo "容器外：docker exec -it 容器名称 bash /sillyGirl/docker-run.sh"
       echo "容器内：bash /sillyGirl/docker-run.sh"
     fi
@@ -48,7 +48,7 @@ if [ -f "/etc/sillyGirl/sillyGirl.cache" ]; then
     pm2 log
   fi
 else
-  echo "未检测到配置文件，请使用命令："
+  echo "sillyGirl未检测到配置文件，请使用命令："
   echo "容器外：docker exec -it 容器名称 bash /sillyGirl/docker-run.sh"
   echo "容器内：bash /sillyGirl/docker-run.sh"
 fi
