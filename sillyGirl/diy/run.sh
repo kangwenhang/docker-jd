@@ -13,8 +13,9 @@ oicq_bot () {
         sed -i 's/://g' /sillyGirl/qq.log
         cat /sillyGirl/qq.log
         botqq=$(cat /sillyGirl/qq.log)
-        if [ -f "/root/.oicq/$botqq/token" ]; then
-          echo "开始启动OICQ"
+        if [ -f "/root/.oicq/$botqq/token" ] || [ -f "/root/.oicq/$botqq/token.sample" ]; then
+          echo "检测到token，开始启动OICQ"
+          cp -rf /root/.oicq/$botqq/token.sample /root/.oicq/$botqq/token
           pm2 start "oicq $botqq"
           return
         else

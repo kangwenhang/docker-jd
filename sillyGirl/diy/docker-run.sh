@@ -25,10 +25,10 @@ oicq_bot() {
       sed -i 's/://g' /sillyGirl/qq.log
       cat /sillyGirl/qq.log
       botqq=$(cat /sillyGirl/qq.log)
-      if [ ! $botqq = "" ] && [ -d "/root/.oicq/$botqq/token" ]; then
+      if [ ! $botqq = "" ] && [ -f "/root/.oicq/$botqq/token" ] || [ -f "/root/.oicq/$botqq/token.sample" ]; then
         echo "配置信息存在。跳过此项部署"
       else
-        echo "登录信息不存在，开始启动OICQ"
+        echo "配置信息不存在，开始启动OICQ"
         one
       fi
     else
@@ -44,6 +44,11 @@ oicq_bot() {
 
 echo -e "\n=============================OICQ配置===================================\n"
 oicq_bot
+if [ $oicqbot = "true" ] && [ -f "/root/.oicq/$botqq/token" ]; then
+  echo "检测到配置完成，备份token文件"
+  cp -rf /root/.oicq/$botqq/token /root/.oicq/$botqq/token.sample
+  echo "备份结束"
+fi
 echo -e "\n=============================OICQ配置===================================\n"
 
 echo -e "\n=============================傻妞配置===================================\n"
