@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get git
 RUN pip install --upgrade poetry
 RUN python -m venv /venv \
-&& mikdir -p /app/dir/ \
+&& mkdir -p /app/dir/ \
 && git clone -b https://github.com/aahnik/tgcf.git /app/dir/
 RUN poetry build && \
     /venv/bin/pip install --upgrade pip wheel setuptools &&\
