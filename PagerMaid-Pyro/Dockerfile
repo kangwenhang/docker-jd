@@ -7,7 +7,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     DEBIAN_FRONTEND=noninteractive \
     RUN_AS_ROOT=true
 SHELL ["/bin/bash", "-c"]
-COPY /PagerMaid-Modify/diy/ /root/diy/
+COPY /PagerMaid-Pyro/diy/ /root/diy/
 RUN source ~/.bashrc \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
