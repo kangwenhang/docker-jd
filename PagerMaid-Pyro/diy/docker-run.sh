@@ -12,7 +12,7 @@ configure() {
   cd /pagermaid/workdir
   config_file=/pagermaid/workdir/config/config.yml
   if [ -e "$config_file" ];then
-    cp -rf $config_file /pagermaid/workdir/config.yml
+    ln -sf $config_file /pagermaid/workdir/config.yml
     echo "配置文件存在，跳过此引导，进行下一步"
     return
   else
@@ -62,11 +62,11 @@ configure() {
           sed -i "s/503691334/$log_chatid/" $config_file
         fi
         sed -i "s/log: False/log: True/" $config_file
-        cp -rf $config_file /pagermaid/workdir/config.yml
+        ln -sf $config_file /pagermaid/workdir/config.yml
         ;;
       [nN][oO]|[nN])
         echo "安装过程继续 . . ."
-        cp -rf $config_file /pagermaid/workdir/config.yml
+        ln -sf $config_file /pagermaid/workdir/config.yml
         ;;
       *)
         echo "输入错误 . . ."
@@ -90,6 +90,7 @@ login() {
     python3 -m pagermaid
     if [ $? = 0 ]; then
       cp -rf /pagermaid/workdir/pagermaid.session /pagermaid/workdir/config/pagermaid.session
+      rm -rf /pagermaid/workdir/pagermaid.session
       exit
     else
       exit

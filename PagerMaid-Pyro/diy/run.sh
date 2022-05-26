@@ -3,9 +3,9 @@
 too() {
   echo "载入配置"
   sleep 2
-  cp -rf /pagermaid/workdir/config/config.yml /pagermaid/workdir/config.yml
+  ln -sf /pagermaid/workdir/config/config.yml /pagermaid/workdir/config.yml
   sleep 2
-  cp -rf /pagermaid/workdir/config/pagermaid.session /pagermaid/workdir/pagermaid.session
+  ln -sf /pagermaid/workdir/config/pagermaid.session /pagermaid/workdir/pagermaid.session
   sleep 2
   echo never > /sys/kernel/mm/transparent_hugepage/enabled
   echo 511 > /proc/sys/net/core/somaxconn
@@ -16,12 +16,6 @@ too() {
 
 if [ -f "/pagermaid/workdir/config/config.yml" -a -f "/pagermaid/workdir/config/pagermaid.session" ];then
   too
-  if [ -f "/pagermaid/workdir/config/redis.conf" ];then
-    pm2 start 'redis-server /pagermaid/workdir/config/redis.conf'
-  else
-    cp /pagermaid/workdir/redis.conf /pagermaid/workdir/config/redis.conf
-    pm2 start 'redis-server /pagermaid/workdir/config/redis.conf'
-  fi
   pm2 start 'python3 -m pagermaid'
   pm2 log
 else 
