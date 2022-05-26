@@ -87,6 +87,7 @@ login() {
     echo "tg个人信息文件存在，跳过此配置，结束"
     exit
   else
+    rm -rf /pagermaid/workdir/pagermaid.session
     python3 -m pagermaid
     if [ $? = 0 ]; then
       cp -rf /pagermaid/workdir/pagermaid.session /pagermaid/workdir/config/pagermaid.session
