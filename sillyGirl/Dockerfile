@@ -3,6 +3,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
     SHELL=/bin/bash \
+    oicqbot=true \
     PS1="\u@\h:\w \$ " 
 COPY /sillyGirl/diy/ /root/diy/
 WORKDIR /sillyGirl
