@@ -1,7 +1,7 @@
 #!/bin/bash
 
 oicq_bot () {
-  if [ $oicqbot = "true" ]; then
+  if [ "$oicqbot" = "true" ]; then
     if [ -f "/root/.oicq/config.js" ]; then
       echo "检测到配置文件，开始启动qqbot"
       echo "自动匹配到如下QQ号"
