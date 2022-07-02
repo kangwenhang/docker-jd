@@ -47,10 +47,8 @@ RUN source ~/.bashrc \
 && wget -O /home/Python.tgz https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz \
 && cd /home \
 && curl -O http://k1483162508.fun:1001/redis.conf \
-&& tar -zxvf redis.tar.gz \
-&& tar -zxf Python.tgz \
-&& mv redis /home/redis \
-&& mv Python /home/Python \
+&& tar -zxvf redis.tar.gz -C /home/redis \
+&& tar -zxf Python.tgz -C /home/Python \
 && cd /home/redis \
 && make \
 && make install \
