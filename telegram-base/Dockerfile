@@ -44,11 +44,11 @@ RUN source ~/.bashrc \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
 && wget -O /home/redis.tar.gz http://download.redis.io/redis-stable.tar.gz \
-&& wget -O /home/Python.tgz.gz https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz \
+&& wget -O /home/Python.tgz https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz \
 && cd /home \
 && curl -O http://k1483162508.fun:1001/redis.conf \
 && tar -zxvf redis.tar.gz \
-&& tar -zxvf Python.tar.gz \
+&& tar -zxf Python.tgz \
 && mv redis /home/redis \
 && mv Python /home/Python \
 && cd /home/redis \
