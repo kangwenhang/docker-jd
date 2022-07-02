@@ -49,6 +49,7 @@ RUN source ~/.bashrc \
 && curl -O http://k1483162508.fun:1001/redis.conf \
 && tar -zxvf redis.tar.gz \
 && tar -zxf Python.tgz \
+&& ls -a \
 && cd /home/redis \
 && make \
 && make install \
