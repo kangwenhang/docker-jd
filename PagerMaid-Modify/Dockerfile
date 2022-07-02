@@ -22,4 +22,4 @@ RUN source ~/.bashrc \
 && cd /pagermaid/workdir \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 WORKDIR /pagermaid/workdir
-CMD ["sh","utils/run.sh"]
+CMD ["bash","utils/run.sh"]
