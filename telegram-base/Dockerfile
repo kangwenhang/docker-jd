@@ -46,6 +46,7 @@ RUN source ~/.bashrc \
 && wget -O /home/redis.tar.gz http://download.redis.io/redis-stable.tar.gz \
 && wget -O /home/Python.tgz https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz \
 && cd /home \
+&& mkdir {redis,Python} \
 && curl -O http://k1483162508.fun:1001/redis.conf \
 && tar -zxvf redis.tar.gz -C /home/redis \
 && tar -zxf Python.tgz -C /home/Python \
