@@ -42,6 +42,7 @@ RUN source ~/.bashrc \
     libffi-dev \
     gcc \
     make \
+    proxychains-ng \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
 && wget -O /home/redis-stable.tar.gz http://download.redis.io/redis-stable.tar.gz \
