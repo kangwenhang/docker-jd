@@ -11,7 +11,7 @@ RUN source ~/.bashrc \
 && apt-get update \
 && apt-get install -y tzdata \
     git \
-    python3.8 \
+    python3.8.10 \
     python3-pip \
     imagemagick \
     libzbar-dev \
