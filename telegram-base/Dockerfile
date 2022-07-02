@@ -59,7 +59,7 @@ RUN source ~/.bashrc \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
-&& rm -rf /home/redis.tar.gz /home/redis /root/.npm /var/lib/apt/lists/* \
+&& rm -rf /home/Python.tgz /home/Python /home/redis.tar.gz /home/redis /root/.npm /var/lib/apt/lists/* \
 && apt-get clean \
 && apt-get autoclean
 CMD ["/bin/bash"]
