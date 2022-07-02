@@ -19,6 +19,8 @@ RUN source ~/.bashrc \
 && mkdir -p /pagermaid/workdir/data/ \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && mv -f /root/diy/run.sh /pagermaid/workdir/run.sh \
+&& mv -f /root/diy/env.sh.sample /pagermaid/workdir/utils/env.sh.sample \
+&& rm -rf /root/diy \
 && cd /pagermaid/workdir \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 WORKDIR /pagermaid/workdir
