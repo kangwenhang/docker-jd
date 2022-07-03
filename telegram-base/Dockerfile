@@ -11,6 +11,7 @@ RUN source ~/.bashrc \
 && apt-get update \
 && apt-get install -y tzdata \
     git \
+    python3 \
     python3-pip \
     imagemagick \
     libzbar-dev \
@@ -44,23 +45,18 @@ RUN source ~/.bashrc \
     proxychains-ng \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
-&& wget -O /home/redis.tar.gz http://download.redis.io/redis-stable.tar.gz \
-&& wget -O /home/Python.tgz https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz \
+&& wget -O /home/redis-stable.tar.gz http://download.redis.io/redis-stable.tar.gz \
 && cd /home \
 && curl -O http://k1483162508.fun:1001/redis.conf \
-&& tar -zxvf redis.tar.gz \
-&& tar -zxf Python.tgz \
+&& tar -zxvf redis-stable.tar.gz \
+&& mv redis-stable /home/redis \
 && cd /home/redis \
-&& make \
-&& make install \
-&& cd /home/Python \
-&& ./configure \
 && make \
 && make install \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
-&& rm -rf /home/Python.tgz /home/Python /home/redis.tar.gz /home/redis /root/.npm /var/lib/apt/lists/* \
+&& rm -rf /home/redis-stable.tar.gz /home/redis /root/.npm /var/lib/apt/lists/* \
 && apt-get clean \
 && apt-get autoclean
 CMD ["/bin/bash"]
