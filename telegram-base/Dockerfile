@@ -11,7 +11,6 @@ RUN source ~/.bashrc \
 && apt-get update \
 && apt-get install -y tzdata \
     git \
-    python3-pip \
     imagemagick \
     libzbar-dev \
     fortune-mod \
@@ -49,14 +48,15 @@ RUN source ~/.bashrc \
 && curl -O http://k1483162508.fun:1001/redis.conf \
 && tar -zxvf redis-stable.tar.gz \
 && tar -zxf Python-3.8.10.tgz \
-&& ls -a \
 && cd /home/redis-stable \
 && make \
 && make install \
 && cd /home/Python-3.8.10 \
-&& ./configure \
+&& ./configure --prefix=/usr/local/python3.8.10 --with-ssl --enable-optimizations \
 && make \
 && make install \
+&& ln -sf /usr/local/python3.8.10/bin/python3 /usr/local/bin/python3 \
+&& ln -sf /usr/local/python3.8.10/bin/pip3 /usr/local/bin/pip3 \
 && npm config set strict-ssl false \
 && npm install -g pm2 \
 && pip3 install socksio python-binance xmltodict jieba\
