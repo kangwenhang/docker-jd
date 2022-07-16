@@ -17,7 +17,6 @@ RUN source ~/.bashrc \
 && git config --global pull.ff only \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && mv -f /root/diy/run.sh /pagermaid/workdir/utils/run.sh \
-&& mv -f /root/diy/env.sh.sample /pagermaid/workdir/utils/env.sh.sample \
 && rm -rf /root/diy \
 && cp /home/redis.conf /pagermaid/workdir/redis.conf \
 && cd /pagermaid/workdir \

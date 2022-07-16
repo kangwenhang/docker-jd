@@ -12,16 +12,6 @@ too() {
   echo "载入完成"
 }
 
-#导入环境变量
-if [ ! -f "/pagermaid/workdir/config/env.sh" ]; then
-  echo -e "检测到env文件不存在，拷贝文件...\n"
-  cp -fv /pagermaid/workdir/utils/env.sh.sample /pagermaid/workdir/config/env.sh
-  echo -e "成功拷贝文件env \n"
-  source /pagermaid/workdir/config/env.sh
-else
-  source /pagermaid/workdir/config/env.sh
-fi
-
 if [ -f "/pagermaid/workdir/config/config.yml" -a -f "/pagermaid/workdir/config/pagermaid.session" ];then
   too
   pm2 start 'python3 -m pagermaid'
