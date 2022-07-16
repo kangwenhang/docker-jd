@@ -13,6 +13,7 @@ RUN source ~/.bashrc \
     git \
     python3 \
     python3-pip \
+    tsocks \
     imagemagick \
     libzbar-dev \
     fortune-mod \
