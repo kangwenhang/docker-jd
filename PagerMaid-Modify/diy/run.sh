@@ -9,6 +9,8 @@ too() {
   sleep 2
   echo never > /sys/kernel/mm/transparent_hugepage/enabled
   echo 511 > /proc/sys/net/core/somaxconn
+  echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
+  sysctl -p
   sleep 2
   echo "载入完成"
 }
