@@ -13,7 +13,7 @@ RUN source ~/.bashrc \
 && echo "Asia/Shanghai" > /etc/timezone \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir/ \
-&& git clone -b master https://gitlab.com/Xtao-Labs/PagerMaid-Pyro.git /pagermaid/workdir \
+&& git clone -b master https://github.com/TeamPGM/PagerMaid-Pyro.git /pagermaid/workdir \
 && git config --global pull.ff only \
 && mkdir -p /pagermaid/workdir/config/ \
 && mkdir -p /pagermaid/workdir/data/ \

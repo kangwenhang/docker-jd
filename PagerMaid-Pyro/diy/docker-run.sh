@@ -41,14 +41,6 @@ configure() {
     else
       sed -i "s/China/$application_region/" $config_file
     fi
-    printf "请输入 Google TTS 语言（默认：zh-CN）："
-    read -r application_tts <&1
-    if [ -z "$application_tts" ]
-    then
-      echo "tts发音语言设置为 简体中文"
-    else
-      sed -i "s/zh-CN/$application_tts/" $config_file
-    fi
     printf "启用日志记录？ [Y/n]"
     read -r logging_confirmation <&1
     case $logging_confirmation in
