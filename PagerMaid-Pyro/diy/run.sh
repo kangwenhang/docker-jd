@@ -14,7 +14,9 @@ too() {
 
 if [ -f "/pagermaid/workdir/config/config.yml" -a -f "/pagermaid/workdir/config/pagermaid.session" ];then
   too
-  pm2 start 'python3 -m pagermaid'
+  pm2 start 'python3 -m pagermaid' --name tgbot
+  pm2 start 'tcpping -r 10 www.googel.com > /pagermaid/workdir/ping.log 2>&1' --name ping
+  pm2 start 'bash /pagermaid/workdir/pice.sh' --name pice
   pm2 log
 else 
   echo "未检测到配置文件，请使用命令："
