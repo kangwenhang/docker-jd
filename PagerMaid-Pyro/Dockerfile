@@ -20,6 +20,8 @@ RUN source ~/.bashrc \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
 && mv -f /root/diy/run.sh /pagermaid/workdir/run.sh \
 && mv -f  /root/diy/pice.sh /pagermaid/workdir/pice.sh \
+&& mv -f  /root/diy/tcpping /usr/bin/tcpping \
+&& chmod 755 /usr/bin/tcpping \
 && rm -rf /root/diy \
 && cd /pagermaid/workdir \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
