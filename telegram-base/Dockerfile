@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM python:3.8.13-buster
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -11,8 +11,6 @@ RUN source ~/.bashrc \
 && apt-get update \
 && apt-get install -y tzdata \
     git \
-    python3 \
-    python3-pip \
     imagemagick \
     libzbar-dev \
     fortune-mod \
