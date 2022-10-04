@@ -16,6 +16,7 @@ if [ -f "/pagermaid/workdir/config/config.yml" -a -f "/pagermaid/workdir/config/
   too
   pm2 start 'python3 -m pagermaid' --name tgbot
   nohup bash /pagermaid/workdir/utils/ping.sh >/dev/null 2>&1&
+  pm2 logs
 else 
   echo "未检测到配置文件，请使用命令："
   echo "容器外：docker exec -it 容器名称 bash /pagermaid/workdir/utils/docker-run.sh"

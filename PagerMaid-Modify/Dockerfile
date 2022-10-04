@@ -20,6 +20,7 @@ RUN source ~/.bashrc \
 && rm -rf /root/diy \
 && cp /home/redis.conf /pagermaid/workdir/redis.conf \
 && cd /pagermaid/workdir \
+&& pip install --upgrade pip \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 WORKDIR /pagermaid/workdir
 CMD ["bash","utils/run.sh"]

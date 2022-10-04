@@ -23,6 +23,7 @@ RUN source ~/.bashrc \
 && mv -f /root/diy/run.sh /pagermaid/workdir/run.sh \
 && rm -rf /root/diy \
 && cd /pagermaid/workdir \
+&& pip install --upgrade pip \
 && pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 WORKDIR /pagermaid/workdir
 CMD ["bash","run.sh"]
