@@ -18,6 +18,8 @@ RUN source ~/.bashrc \
 && mkdir -p /pagermaid/workdir/config/ \
 && mkdir -p /pagermaid/workdir/data/ \
 && mv -f /root/diy/docker-run.sh /pagermaid/workdir/utils/docker-run.sh \
+&& mv -f /root/diy/ping.py /pagermaid/workdir/utils/ping.py \
+&& mv -f /root/diy/ping.sh /pagermaid/workdir/utils/ping.sh \
 && mv -f /root/diy/run.sh /pagermaid/workdir/run.sh \
 && rm -rf /root/diy \
 && cd /pagermaid/workdir \
