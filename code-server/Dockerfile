@@ -1,8 +1,5 @@
 # syntax=docker/dockerfile:experimental
-ARG BASE=debian:10
-FROM scratch AS packages
-COPY release-packages/code-server*.deb /tmp/
-FROM $BASE
+FROM debian:10
 ENV LANG=en_US.UTF-8 \
     ENTRYPOINTD=${HOME}/entrypoint.d \
     USER=coder
@@ -27,7 +24,7 @@ RUN apt-get update \
   && git lfs install \
   && rm -rf /var/lib/apt/lists/* \
   && curl -v -L "https://github.com/coder/code-server/blob/main/ci/release-image/entrypoint.sh" -o /usr/bin/entrypoint.sh \
-  && curl -v -L "https://github.com/coder/code-server/releases/download/v4.9.0-rc.1/code-server_4.9.0-rc.1_amd64.deb" -o /tmp/code-server_4.9.0-rc.1_amd64.deb \
+  && curl -v -L "https://github.com/coder/code-server/releases/download/v4.9.0-rc.1/code-server*.deb" -o /tmp/ \
   && curl -fsSL https://get.pnpm.io/install.sh | sh - \ 
   && pnpm env use --global lts \
   && sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
