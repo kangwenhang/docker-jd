@@ -14,6 +14,8 @@ RUN apt-get update \
     man \
     python3 \
     nano \
+    npm \
+    nodejs \
     git \
     git-lfs \
     procps \
@@ -25,8 +27,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && curl -v -L "https://github.com/coder/code-server/blob/main/ci/release-image/entrypoint.sh" -o /usr/bin/entrypoint.sh \
   && curl -v -L "https://github.com/coder/code-server/releases/download/v4.9.0-rc.1/code-server*.deb" -o /tmp/code-server*.deb \
-  && curl -fsSL https://get.pnpm.io/install.sh | sh - \ 
-  && pnpm env use --global lts \
+  && npm i -g pnpm \
   && sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
   && locale-gen \
   && adduser --gecos '' --disabled-password coder \
