@@ -39,7 +39,8 @@ RUN apt-get update \
   && chmod 4755 /usr/local/bin/fixuid \
   && mkdir -p /etc/fixuid \
   && printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml \
-  && --mount=from=packages,src=/tmp,dst=/tmp/packages dpkg -i /tmp/packages/code-server_${version}_$(dpkg --print-architecture).deb
+  && ls /tmp/packages/ \
+  && dpkg -i /tmp/packages/code-server_${version}_$(dpkg --print-architecture).deb
 
 EXPOSE 8080
 USER 1000
