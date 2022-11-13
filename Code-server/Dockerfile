@@ -33,7 +33,7 @@ RUN apt-get update \
   && echo "coder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd \
   && ARCH="$(dpkg --print-architecture)" \
   && curl -v -L "https://github.com/coder/code-server/blob/main/ci/release-image/entrypoint.sh" -o /usr/bin/entrypoint.sh \
-  && curl -v -L "https://github.com/coder/code-server/releases/download/${version}/code-server_${version}_$(dpkg --print-architecture).deb" -o /tmp/code-server_${version}_$(dpkg --print-architecture).deb \
+  && curl -v -L "https://github.com/coder/code-server/releases/download/v${version}/code-server_${version}_$(dpkg --print-architecture).deb" -o /tmp/code-server_${version}_$(dpkg --print-architecture).deb \
   && curl -fsSL "https://github.com/boxboat/fixuid/releases/download/v0.5/fixuid-0.5-linux-$ARCH.tar.gz" | tar -C /usr/local/bin -xzf - \
   && chown root:root /usr/local/bin/fixuid \
   && chmod 4755 /usr/local/bin/fixuid \
