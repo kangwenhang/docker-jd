@@ -36,6 +36,7 @@ RUN apt-get update \
   && curl -v -L "https://github.com/coder/code-server/releases/download/v${version}/code-server_${version}_$(dpkg --print-architecture).deb" -o /tmp/code-server_${version}_$(dpkg --print-architecture).deb \
   && curl -fsSL "https://github.com/boxboat/fixuid/releases/download/v0.5/fixuid-0.5-linux-$ARCH.tar.gz" | tar -C /usr/local/bin -xzf - \
   && chown root:root /usr/local/bin/fixuid \
+  && chmod 777 /usr/bin/entrypoint.sh \
   && chmod 4755 /usr/local/bin/fixuid \
   && mkdir -p /etc/fixuid \
   && printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml \
