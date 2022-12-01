@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '1 0,15 * * *'
   workflow_dispatch:
   watch:
         types: [started]
