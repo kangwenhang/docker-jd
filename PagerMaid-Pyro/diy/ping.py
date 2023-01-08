@@ -56,7 +56,7 @@ def socks5_decide():
     desStr5 = 'mtp_addr:' 
     agent = True
     mtp_addr = False
-    e = open("config.yml","r",encoding='utf-8')
+    e = open("/pagermaid/workdir/config.yml","r",encoding='utf-8')
     data = e.readlines()
     e.close
     for line in data:
