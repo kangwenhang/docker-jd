@@ -2,7 +2,6 @@
 import requests
 import time
 import subprocess
-import re
 
 def main():
     attempts=0
@@ -10,33 +9,33 @@ def main():
     g,g1,agent,mtp_addr = socks5_decide()
     pm2stop = "pm2 stop tgbot"
     pm2start = "pm2 start tgbot"
-    url = "https://www.google.com/"
-    proxies = {
+    url = "https://www.google.com.hk/"
+    proxies = {"proxies":{
       g,
        g1
-    }
+    }}
     headers = {'User-Agent':'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko)Version/5.1 Safari/534.50'}
     while attempts < 3 and not success:
         a = pm2_status()
         b = "stopped"
         c = "online"
         try:
-            if agent == False :
+            if not agent:
                 resp = requests.get(url,headers=headers,timeout=40)
                 if resp.status_code == 200 and b in a:
                     subprocess.run(pm2start, shell=True)
                     success = True
                 elif resp.status_code == 200 and c in a:
                     success = True
-            elif agent == True and mtp_addr == False:
-                resp = requests.get(url,headers=headers,proxies=proxies,timeout=40)
+            elif not agent and not mtp_addr:
+                break
+            else:
+                resp = requests.get(url,headers=headers,proxies=proxies,timeout=80)
                 if resp.status_code == 200 and b in a:
                     subprocess.run(pm2start, shell=True)
                     success = True
                 elif resp.status_code == 200 and c in a:
                     success = True
-            else:
-                break
         except:
             attempts += 1
             time.sleep(5)
