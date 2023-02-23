@@ -10,7 +10,7 @@ function satrt_pid()
     socks5_decide
     pm2_status
     if [[ $agent == "yes" ]]; then
-        code=`curl --socks5 $proxy -I -m 30 -o /dev/null -s -w %{http_code}"\n" $url`
+        code=`curl --socks5 $proxy -I -m 500 -o /dev/null -s -w %{http_code}"\n" $url`
         echo $code
         code_status
     elif [[ $agent == "no" ]] && [[ $mtp_addr == "no" ]]; then
@@ -51,7 +51,8 @@ function socks5_decide {
     j=1
     agent="no"
     mtp_addr="no"
-    desStr5=`cat /pagermaid/workdir/config.yml | grep $desStr5`
+    cd /pagermaid/workdir/
+    desStr5=`cat config.yml | grep $desStr5`
     desStr5=`echo $desStr5 | sed -r 's/.*"(.+)".*/\1/'`
     if [[ $desStr5 == 'mtp_addr: ""' ]]; then
         while [[ j -le 3 ]]; do
