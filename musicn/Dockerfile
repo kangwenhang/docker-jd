@@ -9,9 +9,9 @@ COPY run.sh /root/run.sh
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update -f \
     && apk upgrade \
-    && apk --no-cache add -f git \
+    && apk --no-cache add -f git bash \
     && git clone https://github.com/zonemeen/musicn.git $MUSICN_DIR \
     && cd /musicn \
     && npm install \
     && npm run musicn-build
-CMD ["node","./bin/cli.js"," --qrcode"]
+CMD ["bash","/root/run.sh"]
