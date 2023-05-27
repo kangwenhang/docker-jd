@@ -7,5 +7,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
 WORKDIR $MUSICN_DIR
 COPY run.sh /root/run.sh
 RUN git clone https://github.com/zonemeen/musicn.git $MUSICN_DIR\
-&& cd musicn
+&& cd musicn \
+&& npm install \
+&& npm run build
 CMD ["node","./bin/cli.js"," --qrcode"]
