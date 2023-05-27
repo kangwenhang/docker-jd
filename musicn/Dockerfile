@@ -13,5 +13,5 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && git clone https://github.com/zonemeen/musicn.git $MUSICN_DIR \
     && cd /musicn \
     && npm install \
-    && npm run build
+    && npm run musicn-build
 CMD ["node","./bin/cli.js"," --qrcode"]
