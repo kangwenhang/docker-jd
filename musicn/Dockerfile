@@ -10,7 +10,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f git \
-    && git clone https://github.com/zonemeen/musicn.git $MUSICN_DIR \
+    && git clone -b main https://github.com/zonemeen/musicn.git $MUSICN_DIR \
     && cd musicn \
     && npm install \
     && npm run build
