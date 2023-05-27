@@ -4,5 +4,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ "
 WORKDIR /data
+COPY run.sh /root/run.sh
 RUN npm i musicn -g
-CMD ["bash"]
+CMD ["bash","/root/run.sh"]
