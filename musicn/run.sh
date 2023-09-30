@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /musicn
-node ./bin/cli.js --qrcode
+pm2 start ./bin/cli.js --name music-app -- -q
 
 tail -f /dev/null
 
