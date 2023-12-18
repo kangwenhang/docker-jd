@@ -19,7 +19,7 @@ COPY sample /photos/sample
 RUN apt-get update \
     && apt-get install -y cron \
     && chmod +x /photos/docker-entrypoint.sh \
-    && pip install Pillow hashlib configparser exiftool logging
+    && pip install Pillow configparser exiftool logging
 
 # 启动你的入口点脚本
 ENTRYPOINT ["./docker-entrypoint.sh"]
