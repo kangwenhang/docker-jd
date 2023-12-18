@@ -31,14 +31,14 @@ RUN apt-get upgrade \
                           nodejs \
                           npm \
                           python3 \
-                          pipx \
+                          pip \
     && apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* \
     && npm config set strict-ssl false \
     && npm install -g pm2 \
-    && pipx ensurepath \
-    && pipx install setuptools Pillow configparser pyexiftool \
+    && mv /usr/lib/python3.x/EXTERNALLY-MANAGED /usr/lib/python3.x/EXTERNALLY-MANAGED.bk \
+    && pip install setuptools Pillow configparser pyexiftool \
     && sed -i 's/$PrivDrop/# $PrivDrop/g' /etc/rsyslog.conf \
     && sed -i '/imklog/s/^/#/' /etc/rsyslog.conf \
     && sed -i 's/#cron/cron/g' /etc/rsyslog.d/50-default.conf \
