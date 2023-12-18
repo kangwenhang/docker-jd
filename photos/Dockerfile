@@ -12,6 +12,7 @@ COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
 COPY script /photos/script
 COPY sample /photos/sample
 RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list \
+    && sed -i -i 's@//.*ports.ubuntu.com@//mirrors.aliyun.com@g' /etc/apt/sources.list \
     && sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
     && sed -i 's/http:/https:/g' /etc/apt/sources.list \
     && apt-get upgrade \
