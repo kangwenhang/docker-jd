@@ -20,7 +20,7 @@ RUN apt-get update \
     && apt-get install -y cron \
     && chmod +x /photos/docker-entrypoint.sh \
     && pip install --upgrade pip \
-    && pip install setuptools Pillow configparser pyexiftool logging
+    && pip install setuptools Pillow configparser pyexiftool
 
 # 启动你的入口点脚本
 ENTRYPOINT ["./docker-entrypoint.sh"]
