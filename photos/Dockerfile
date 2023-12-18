@@ -19,7 +19,8 @@ COPY sample /photos/sample
 RUN apt-get update \
     && apt-get install -y cron \
     && chmod +x /photos/docker-entrypoint.sh \
-    && pip install Pillow configparser exiftools logging
+    && pip install --upgrade pip \
+    && pip install Pillow configparser exiftool logging
 
 # 启动你的入口点脚本
 ENTRYPOINT ["./docker-entrypoint.sh"]
