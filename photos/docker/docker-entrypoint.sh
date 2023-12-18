@@ -1,29 +1,51 @@
 #!/bin/bash
 
 echo -e "======================1.检测配置文件========================\n"
-
-# 检查工作目录下是否有config文件夹，如果没有则创建
-if [ ! -d "/photos/config" ]; then
-  mkdir /photos/config
+if [ ! -d "/photos/config/" ]; then
+  echo -e "检测到config文件夹不存在，创建文件夹...\n"
+  mkdir -p /photos/config/
+  echo -e "成功创建文件夹 config \n"
 fi
 
-# 检查工作目录下是否有logs文件夹，如果没有则创建
-if [ ! -d "/photos/logs" ]; then
-  mkdir /photos/logs
+if [ ! -d "/photos/logs/" ]; then
+  echo -e "检测到log文件夹不存在，创建文件夹...\n"
+  mkdir -p /photos/logs/
+  echo -e "成功创建文件夹 logs \n"
 fi
 
-# 检查工作目录下是否有settings.ini文件，如果没有则从/app/config文件夹中复制
-# Check if there is a settings.ini file in the working directory, and copy it from /app/config folder if not
-cp -n /photos/sample/settings.ini.sample /photos/config/settings.ini
-cp -n /photos/sample/crontab.list.sample /photos/config/crontab.list
+if [ -s /photos/config/crontab.list ]
+then
+  echo -e "检测到config配置目录下存在crontab.list，自动导入定时任务...\n"
+  crontab /photos/config/crontab.list
+  echo -e "成功添加定时任务...\n"
+else
+  echo -e "检测到config配置目录下不存在crontab.list或存在但文件为空，从示例文件复制一份用于初始化...\n"
+  cp -fv /photos/sample/crontab.list.sample /photos/config/crontab.list
+  echo
+  crontab /photos/config/crontab.list
+  echo -e "成功添加定时任务...\n"
+fi
+
+if [ -s /photos/config/setting.ini ]
+then
+  echo -e "检测到config配置目录下存在setting.ini，跳过...\n"
+else
+  echo -e "检测到config配置目录下不存在setting.ini或存在但文件为空，从示例文件复制一份用于初始化...\n"
+  cp -fv /photos/sample/setting.ini.sample /photos/config/setting.ini
+  echo -e "成功添加变量文件...\n"
+fi
 
 echo -e "==================2. 启动定时同步（实时）========================\n"
-# 在后台执行你的upcron.sh脚本，不输出任何信息
-./shcript/upcron.sh > /dev/null 2>&1 &
+cd /photos/script
+pm2 start 'bash upcron.sh'
+echo -e "定时同步启动成功...\n"
 
 echo -e "======================3.启动定时========================\n"
-# 启动cron服务
-cron
+: > /var/log/cron.log
+rm -rf /run/rsyslogd.pid
+rm -rf /var/run/crond.pid
+service rsyslog start
+service cron start
+tail -f /var/log/cron.log
 
-# 实时显示test.log文件的内容
-tail -f /app/logs/test.log &
+exec "$@"
