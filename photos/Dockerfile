@@ -32,6 +32,7 @@ RUN apt-get upgrade \
                           npm \
                           python3 \
                           pip \
+    && python --version \
     && apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* \
