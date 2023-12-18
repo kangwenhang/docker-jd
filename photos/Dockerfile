@@ -11,8 +11,7 @@ WORKDIR ${dir_root}
 COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
 COPY script /photos/script
 COPY sample /photos/sample
-RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
-    && apt-get upgrade \
+RUN apt-get upgrade \
     && apt-get update \
     && apt-get install -y bash \
                           git \
