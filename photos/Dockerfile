@@ -1,4 +1,4 @@
-FROM ubuntu:22.10
+FROM Ubuntu 24.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -11,8 +11,7 @@ WORKDIR ${dir_root}
 COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
 COPY script /photos/script
 COPY sample /photos/sample
-RUN cat /etc/apt/sources.list \
-    && apt-get upgrade \
+RUN apt-get upgrade \
     && apt-get update \
     && apt-get install -y bash \
                           git \
