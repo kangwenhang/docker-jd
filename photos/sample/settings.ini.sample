@@ -20,5 +20,5 @@ low_res_height_threshold = 500
 
 [paths]
 # 定义源文件夹和目标文件夹的路径
-source_paths = /home/cs, /home/cs2
-target_paths = /home/test, /home/test2meiy
+source_paths = /photos/name1, /photos/name2
+target_paths = /photos/name1-1, /photos/name2-2

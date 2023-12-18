@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #导入变量
-. /photos/script/share.sh
+ListCron=/photos/config/crontab.list
 md5=package_md5
 
 # 创建md5的函数

@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 import os
-import shutil
+import shutilpip
 from datetime import datetime
 import hashlib # 导入hashlib库，用于计算文件的哈希值
 import configparser # 导入configparser库，用于读写ini文件
 import exiftool # 导入exiftool库，用于获取heic文件的日期信息
 import logging # 导入logging库，用于记录日志
 
-# 从ini文件中读取配置信息，将ini文件的路径改为/home/config/settings.ini，并加上了os.path.join函数
+# 从ini文件中读取配置信息，将ini文件的路径改为/photos/config/settings.ini，并加上了os.path.join函数
 config = configparser.ConfigParser()
-config.read(os.path.join('/home', 'config', 'settings.ini'))
+config.read(os.path.join('/photos', 'config', 'settings.ini'))
 photo_formats = config.get('formats', 'photo_formats').split(',')
 video_formats = config.get('formats', 'video_formats').split(',')
 low_res_folder_name = config.get('folders', 'low_res_folder_name')
@@ -20,14 +20,20 @@ screenshot_folder_name = config.get('folders', 'screenshot_folder_name')
 small_size_threshold = config.getint('thresholds', 'small_size_threshold')
 low_res_width_threshold = config.getint('thresholds', 'low_res_width_threshold')
 low_res_height_threshold = config.getint('thresholds', 'low_res_height_threshold')
-log_path = os.path.join('/home', 'log', 'organize.log')
-shell_script = os.path.join(os.path.dirname(__file__), 'photos.sh')
+log_path = os.path.join('/photos', 'log', 'organize.log')
 source_paths = config.get('paths', 'source_paths').split(',')
 target_paths = config.get('paths', 'target_paths').split(',')
 
 def get_date_taken(path):
     try:
-        return Image.open(path)._getexif()[36867]
+        # 将文件名转换为小写，然后判断是否以heic结尾
+        # Convert the file name to lowercase, and then check if it ends with heic
+        if path.lower().endswith('.heic'):
+            with exiftool.ExifTool() as et:
+                metadata = et.get_metadata(path)
+                return metadata['EXIF:DateTimeOriginal']
+        else:
+            return Image.open(path)._getexif()[36867]
     except Exception:
         return None
 
@@ -131,10 +137,3 @@ if len(source_paths) != len(target_paths):
 # 遍历每个source_path和target_path，调用organize_files_by_date函数
 for source, target in zip(source_paths, target_paths):
     organize_files_by_date(source, target)
-
-# 在脚本最后运行自定义shell脚本，并记录日志
-try:
-    os.system(shell_script)
-    logging.info(f"Ran shell script: {shell_script}")
-except Exception:
-    logging.error(f"Failed to run shell script: {shell_script}")
