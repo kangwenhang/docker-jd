@@ -26,12 +26,12 @@ else
   echo -e "成功添加定时任务...\n"
 fi
 
-if [ -s /photos/config/setting.ini ]
+if [ -s /photos/config/settings.ini ]
 then
-  echo -e "检测到config配置目录下存在setting.ini，跳过...\n"
+  echo -e "检测到config配置目录下存在settings.ini，跳过...\n"
 else
-  echo -e "检测到config配置目录下不存在setting.ini或存在但文件为空，从示例文件复制一份用于初始化...\n"
-  cp -fv /photos/sample/setting.ini.sample /photos/config/setting.ini
+  echo -e "检测到config配置目录下不存在settings.ini或存在但文件为空，从示例文件复制一份用于初始化...\n"
+  cp -fv /photos/sample/settings.ini.sample /photos/config/settings.ini
   echo -e "成功添加变量文件...\n"
 fi
 
