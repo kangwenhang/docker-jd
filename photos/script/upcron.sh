@@ -7,31 +7,29 @@ md5=package_md5
 # 创建md5的函数
 function creatmd5()
 {
-    printf "%s\n" "$package_md5_new" > "$md5"
+    echo $package_md5_new > $md5
 }
 
 # 判断文件是否存在
-if [[ ! -f $md5 ]] ; then
-    printf "md5file is not exsit,create md5file.......\n"
+if [ ! -f $md5 ] ; then
+    echo "md5file is not exsit,create md5file......."
     creatmd5
     exit
 fi
 
 # 对象对比判断
-# 捕捉信号
-trap 'printf "Script interrupted\n"; exit' SIGINT SIGTERM
 while :
 do
-    package_md5_new=$(md5sum -b "${ListCron}" | awk '{print $1}'|sed 's/ //g')
-    package_md5_old=$(< "$md5"|sed 's/ //g')
-    printf "%s\n" "$package_md5_new"
-    printf "%s\n" "$package_md5_old"
-    if [[ "$package_md5_new" == "$package_md5_old" ]]; then
-        printf "\n"
+    package_md5_new=$(md5sum -b ${ListCron} | awk '{print $1}'|sed 's/ //g')
+    package_md5_old=$(cat $md5|sed 's/ //g')
+    echo $package_md5_new
+    echo $package_md5_old
+    if [ "$package_md5_new" == "$package_md5_old" ]; then
+        echo ""
     else
-        printf "定时变动\n"
+        echo "定时变动"
         creatmd5
-        crontab "${ListCron}"
+        crontab ${ListCron}
     fi
     sleep 2s
 done
