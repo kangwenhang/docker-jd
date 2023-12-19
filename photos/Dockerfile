@@ -38,7 +38,7 @@ RUN apt-get upgrade \
     && npm config set strict-ssl false \
     && npm install -g pm2 \
     && mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bk \
-    && pip install setuptools Pillow configparser pyexiftool \
+    && pip install setuptools pillow==10.0.0 configparser pyexiftool \
     && sed -i 's/$PrivDrop/# $PrivDrop/g' /etc/rsyslog.conf \
     && sed -i '/imklog/s/^/#/' /etc/rsyslog.conf \
     && sed -i 's/#cron/cron/g' /etc/rsyslog.d/50-default.conf \
