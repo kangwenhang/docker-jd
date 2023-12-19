@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-import shutilpip
+import shutil
 from datetime import datetime
 import hashlib # 导入hashlib库，用于计算文件的哈希值
 import configparser # 导入configparser库，用于读写ini文件
@@ -20,7 +20,7 @@ screenshot_folder_name = config.get('folders', 'screenshot_folder_name')
 small_size_threshold = config.getint('thresholds', 'small_size_threshold')
 low_res_width_threshold = config.getint('thresholds', 'low_res_width_threshold')
 low_res_height_threshold = config.getint('thresholds', 'low_res_height_threshold')
-log_path = os.path.join('/photos', 'log', 'organize.log')
+log_path = os.path.join('/photos', 'logs', 'organize.log')
 source_paths = config.get('paths', 'source_paths').split(',')
 target_paths = config.get('paths', 'target_paths').split(',')
 
