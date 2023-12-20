@@ -8,7 +8,6 @@ video_formats = .mp4, .avi, .mov, .flv, .mkv
 low_res_folder_name = 其他/低分辨率
 small_size_folder_name = 其他/小图片
 duplicated_folder_name = 其他/重复照片
-error_folder_name = 其他/错误文件
 screenshot_folder_name = 其他/截图
 
 [thresholds]
