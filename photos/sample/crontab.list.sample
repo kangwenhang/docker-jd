@@ -2,4 +2,4 @@
 59 7 * * 1 /push/shell/rmlog.sh
  
 # 运行
-0,30 * * * * python3 /photos/scipt/photos
+0,30 * * * * python3 /photos/scipt/photos.py
