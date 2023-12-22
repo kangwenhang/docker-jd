@@ -2,11 +2,12 @@
 import os
 import shutil
 from PIL import Image
-from datetime import datetime
+import datetime
 import hashlib # 导入hashlib库，用于计算文件的哈希值
 import configparser # 导入configparser库，用于读写ini文件
 import logging # 导入logging库，用于记录日志
 import exifread # 导入exifread库
+import pyheif # 导入pyheif库
 
 #定义常量
 EXIF_DATE_TIME_ORIGINAL = 36867
@@ -27,21 +28,22 @@ log_path = os.path.join('/photos', 'logs', 'organize.log')
 source_paths = config.get('paths', 'source_paths').split(',')
 target_paths = config.get('paths', 'target_paths').split(',')
 
-def get_date_taken(path):
+def get_date_taken(file_path):
     try:
-        with open(path, 'rb') as f:
+        with open(file_path, 'rb') as f:
             # 获取图片的元数据
             tags = exifread.process_file(f)
             # 如果元数据存在，查找EXIF DateTimeOriginal的键值
-            if tags:
-                date_taken = tags.get('EXIF DateTimeOriginal')
-                if date_taken:
-                    print(f"The date taken of {path} is {date_taken}")
-                    return date_taken
-        # 如果元数据不存在，或者没有EXIF DateTimeOriginal的信息，使用os.path.getmtime方法来获取图片的修改时间
-        mtime = os.path.getmtime(path)
-        print(f"The date taken of {path} is {mtime}")
-        return mtime
+            if 'EXIF DateTimeOriginal' in tags:
+                date_taken = tags['EXIF DateTimeOriginal']
+                # 将日期转换为datetime对象
+                date_taken = datetime.datetime.strptime(str(date_taken), '%Y:%m:%d %H:%M:%S')
+                return date_taken
+            else:
+                date_taken = os.path.getmtime(file_path)
+                # 将日期转换为datetime对象
+                date_taken = datetime.datetime.fromtimestamp(date_taken)
+                return date_taken
     # 使用contextlib.suppress来忽略特定的异常
     except (FileNotFoundError, OSError):
         return None
@@ -73,14 +75,14 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
     for folder in [low_res_folder, small_size_folder, duplicated_folder, screenshot_folder]:
         if not os.path.exists(folder):
             os.makedirs(folder)
-    # 配置logging模块，设置日志级别为INFO，日志格式为时间+消息，日志文件名为log_path，日志模式为追加
-    # 在配置logging模块之前，检查log_path是否存在，如果不存在，就创建它，这是修改的地方
+    # 配置logging模块，设置日志级别为INFO，日志格式为时间+消息，日志文件名为log_path，日志模式为追加,在配置logging模块之前，检查log_path是否存在，如果不存在，就创建它
     if not os.path.exists(log_path):
         open(log_path, 'w').close()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s', filename=log_path, filemode='a')
     for dirpath, dirnames, filenames in os.walk(directory):
         for filename in filenames:
-            if os.path.splitext(filename)[1] in photo_formats + video_formats: 
+            # 使用or运算符来代替+运算符
+            if os.path.splitext(filename)[1].lower() in photo_formats or os.path.splitext(filename)[1].lower() in video_formats:
                 file_path = os.path.join(dirpath, filename)
                 file_hash = calculate_hash(file_path)
                 # 如果文件名中包含screenshot，就移动到截图文件夹，并记录日志
@@ -95,8 +97,19 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                     continue
                 # 否则，将文件的哈希值添加到集合中
                 file_hashes.add(file_hash)
-                if filename.endswith(tuple(photo_formats)):
-                    img = Image.open(file_path)
+                if filename.lower().endswith(tuple(photo_formats)):
+                    if filename.lower().endswith(".heic"):
+                        heif_file = pyheif.read_heif(file_path)
+                        img = Image.frombytes(
+                        heif_file.mode, 
+                        heif_file.size, 
+                        heif_file.data,
+                        "raw",
+                        heif_file.mode,
+                        heif_file.stride,
+                        )
+                    else: 
+                        img = Image.open(file_path)
                     # 如果文件的分辨率低于阈值，就移动到低分辨率文件夹，并记录日志
                     if img.size < min_resolution:
                         logging.info(f"Low resolution image: {filename}, resolution: {img.size}")
@@ -108,14 +121,14 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                         shutil.move(file_path, small_size_folder)
                         continue
                 # 获取文件的日期，如果是图片格式，就使用get_date_taken函数，如果是视频格式，就使用os.path.getmtime函数
-                date = get_date_taken(file_path) if filename.endswith(tuple(photo_formats)) else os.path.getmtime(file_path)
+                if filename.lower().endswith(tuple(photo_formats)):
+                    date = get_date_taken(file_path)
+                else:
+                    date = os.path.getmtime(file_path)
                 # 如果无法获取日期，就跳过后面的代码，直接移动文件到错误文件夹，并记录日志 # 修改
                 if date is None:
                     logging.info(f"No date found for file: {filename}")
-                    new_filename = filename
                     continue
-                # 将日期转换为datetime对象，如果是浮点数，就使用datetime.fromtimestamp函数，如果是字符串，就使用datetime.strptime函数
-                date = datetime.fromtimestamp(date) if isinstance(date, float) else datetime.strptime(date, '%Y:%m:%d %H:%M:%S')
                 # 格式化日期为YYYYMMDD-HHMMSS的形式
                 date_str = date.strftime('%Y%m%d-%H%M%S')
                 # 获取文件的扩展名
