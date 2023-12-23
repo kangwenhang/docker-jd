@@ -1,7 +1,7 @@
 [formats]
 # 定义照片和视频的格式
-photo_formats = .jpg, .jpeg, .png, .bmp, .gif
-video_formats = .mp4, .avi, .mov, .flv, .mkv
+photo_formats = .jpg,.jpeg,.png,.bmp,.gif
+video_formats = .mp4,.avi,.mov,.flv,.mkv
 
 [folders]
 # 定义低分辨率，小图片，重复照片，错误文件，截图的文件夹的名称
@@ -21,5 +21,5 @@ MAX_IMAGE_PIXELS = 1000000000
 
 [paths]
 # 定义源文件夹和目标文件夹的路径
-source_paths = /photos/name1, /photos/name2
-target_paths = /photos/name1-1, /photos/name2-2
+source_paths = /name1, /name2
+target_paths = /name1-1, /name2-2
