@@ -16,6 +16,8 @@ small_size_threshold = 10
 # 定义低分辨率的宽度和高度阈值，单位为像素
 low_res_width_threshold = 500
 low_res_height_threshold = 500
+#定义警告阈值-防止dos攻击
+MAX_IMAGE_PIXELS = 1000000000
 
 [paths]
 # 定义源文件夹和目标文件夹的路径

@@ -24,6 +24,7 @@ screenshot_folder_name = config.get('folders', 'screenshot_folder_name')
 small_size_threshold = config.getint('thresholds', 'small_size_threshold')
 low_res_width_threshold = config.getint('thresholds', 'low_res_width_threshold')
 low_res_height_threshold = config.getint('thresholds', 'low_res_height_threshold')
+Image.MAX_IMAGE_PIXELS = config.getint('thresholds', 'MAX_IMAGE_PIXELS')
 log_path = os.path.join('/photos', 'logs', 'organize.log')
 source_paths = config.get('paths', 'source_paths').split(',')
 target_paths = config.get('paths', 'target_paths').split(',')
@@ -85,18 +86,22 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
             if os.path.splitext(filename)[1].lower() in photo_formats or os.path.splitext(filename)[1].lower() in video_formats:
                 file_path = os.path.join(dirpath, filename)
                 file_hash = calculate_hash(file_path)
+                # 如果文件的哈希值已经存在，就移动到重复文件夹，并记录日志;否则，将文件的哈希值添加到集合中
+                if file_hash in file_hashes:
+                    shutil.move(file_path, duplicated_folder)
+                    logging.info(f"Duplicated file: {filename}")
+                    continue
+                else:
+                    file_hashes.add(file_hash)
                 # 如果文件名中包含screenshot，就移动到截图文件夹，并记录日志
                 if 'screenshot' in filename.lower():
-                    shutil.move(file_path, screenshot_folder)
-                    logging.info(f"Moved screenshot file: {filename} to {screenshot_folder}")
-                    continue
-                # 如果文件的哈希值已经存在，就移动到重复文件夹，并记录日志
-                if file_hash in file_hashes:
-                    logging.info(f"Duplicated file: {filename}")
-                    shutil.move(file_path, duplicated_folder)
-                    continue
-                # 否则，将文件的哈希值添加到集合中
-                file_hashes.add(file_hash)
+                    destination_file_path = os.path.join(screenshot_folder, filename)
+                    if os.path.exists(destination_file_path):
+                        continue
+                    else:
+                        shutil.move(file_path, screenshot_folder)
+                        logging.info(f"Moved screenshot file: {filename} to {screenshot_folder}")
+                        continue
                 if filename.lower().endswith(tuple(photo_formats)):
                     if filename.lower().endswith(".heic"):
                         heif_file = pyheif.read_heif(file_path)
@@ -112,19 +117,28 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                         img = Image.open(file_path)
                     # 如果文件的分辨率低于阈值，就移动到低分辨率文件夹，并记录日志
                     if img.size < min_resolution:
-                        logging.info(f"Low resolution image: {filename}, resolution: {img.size}")
-                        shutil.move(file_path, low_res_folder)
-                        continue
+                        destination_file_path = os.path.join(low_res_folder, filename)
+                        if os.path.exists(destination_file_path):
+                            continue
+                        else:
+                            shutil.move(file_path, low_res_folder)
+                            logging.info(f"Low resolution image: {filename}, resolution: {img.size}")
+                            continue
                     # 如果文件的大小低于阈值，就移动到小图片文件夹，并记录日志
                     if os.path.getsize(file_path) < min_size_kb * 1024:
-                        logging.info(f"Small size image: {filename}, size: {os.path.getsize(file_path) / 1024} KB")
-                        shutil.move(file_path, small_size_folder)
+                        destination_file_path = os.path.join(small_size_folder, filename)
+                        if os.path.exists(destination_file_path):
+                            continue
+                        else:
+                            shutil.move(file_path, small_size_folder)
+                            logging.info(f"Small size image: {filename}, size: {os.path.getsize(file_path) / 1024} KB")
                         continue
                 # 获取文件的日期，如果是图片格式，就使用get_date_taken函数，如果是视频格式，就使用os.path.getmtime函数
                 if filename.lower().endswith(tuple(photo_formats)):
                     date = get_date_taken(file_path)
                 else:
                     date = os.path.getmtime(file_path)
+                    date = datetime.datetime.fromtimestamp(date)
                 # 如果无法获取日期，就跳过后面的代码，直接移动文件到错误文件夹，并记录日志 # 修改
                 if date is None:
                     logging.info(f"No date found for file: {filename}")
@@ -145,12 +159,13 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                     os.makedirs(month_folder)
                 # 在移动文件之前，检查目标文件夹中是否已经存在相同的文件名，如果存在，就在文件名后面加上一个数字
                 new_file_path = os.path.join(month_folder, new_filename)
-                counter = 1
-                while os.path.exists(new_file_path):
-                    # 在文件名和扩展名之间加上一个数字
-                    new_filename = date_str + '-' + str(counter) + ext
-                    new_file_path = os.path.join(month_folder, new_filename)
-                    counter += 1
+                if file_hash not in file_hashes:
+                    counter = 1
+                    while os.path.exists(new_file_path):
+                        # 在文件名和扩展名之间加上一个数字
+                        new_filename = date_str + '-' + str(counter) + ext
+                        new_file_path = os.path.join(month_folder, new_filename)
+                        counter += 1
                 # 移动文件到对应的月份文件夹下，并用新的文件名重命名，并记录日志
                 shutil.move(file_path, new_file_path)
                 logging.info(f"Moved file: {filename} to {month_folder} and renamed to {new_filename}")
