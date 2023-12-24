@@ -32,6 +32,8 @@ RUN apt-get upgrade \
                           npm \
                           python3 \
                           pip \
+                          gcc \
+                          libssl-dev \
                           libjpeg-dev \
                           zlib1g-dev \
                           libffi-dev \

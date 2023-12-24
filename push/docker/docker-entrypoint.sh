@@ -54,8 +54,8 @@ echo -e "======================3.启动定时========================\n"
 : > /var/log/cron.log
 rm -rf /run/rsyslogd.pid
 rm -rf /var/run/crond.pid
-service rsyslog start
+/usr/sbin/rsyslogd
 service cron start
-tail -f /var/log/cron.log
+tail -f /var/log/cron.log | grep -v 'run-parts'
 
 exec "$@"

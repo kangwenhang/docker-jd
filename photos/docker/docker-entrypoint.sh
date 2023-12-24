@@ -41,17 +41,25 @@ else
   echo -e "成功添加变量文件...\n"
 fi
 
-echo -e "==================2. 启动定时同步（实时）========================\n"
+echo -e "==================2. 运行初始化数据库脚本========================\n"
+python3 /photos/script/dbinitialize.py
+if [ $? -eq 0 ]; then
+  echo "初始化数据库成功"
+else
+  echo "初始化数据库失败了，请检查数据库文件是否正确"
+fi
+
+echo -e "==================3. 启动定时同步（实时）========================\n"
 cd /photos/script
 pm2 start 'bash upcron.sh'
 echo -e "定时同步启动成功...\n"
 
-echo -e "======================3.启动定时========================\n"
+echo -e "==========================4.启动定时============================\n"
 : > /var/log/cron.log
 rm -rf /run/rsyslogd.pid
 rm -rf /var/run/crond.pid
 /usr/sbin/rsyslogd
 service cron start
-tail -f /var/log/cron.log
+tail -f /var/log/cron.log | grep -v 'run-parts'
 
 exec "$@"
