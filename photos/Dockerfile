@@ -34,6 +34,7 @@ RUN apt-get upgrade \
                           pip \
                           libjpeg-dev \
                           zlib1g-dev \
+                          libffi-dev \
     && apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* \
