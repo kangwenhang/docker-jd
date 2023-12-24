@@ -7,6 +7,12 @@ if [ ! -d "/photos/config/" ]; then
   echo -e "成功创建文件夹 config \n"
 fi
 
+if [ ! -d "/photos/config/db" ]; then
+  echo -e "检测到db文件夹不存在，创建文件夹...\n"
+  mkdir -p /photos/config/db
+  echo -e "成功创建文件夹 db \n"
+fi
+
 if [ ! -d "/photos/logs/" ]; then
   echo -e "检测到log文件夹不存在，创建文件夹...\n"
   mkdir -p /photos/logs/
