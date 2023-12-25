@@ -37,6 +37,8 @@ RUN apt-get upgrade \
                           libjpeg-dev \
                           zlib1g-dev \
                           libffi-dev \
+                          libheif-dev \
+                          libde265-dev \
     && apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* \
