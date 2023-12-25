@@ -26,7 +26,6 @@ RUN apt-get upgrade \
                           rsyslog \
                           sudo \
                           postfix \
-                          rename \
                           rsync \
                           nodejs \
                           npm \
@@ -39,13 +38,14 @@ RUN apt-get upgrade \
                           libffi-dev \
                           libheif-dev \
                           libde265-dev \
-    && apt-get clean \
-    && apt-get autoclean \
-    && rm -rf /var/lib/apt/lists/* \
     && npm config set strict-ssl false \
     && npm install -g pm2 \
     && mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bk \
     && pip install setuptools pillow configparser pyexiftool pyheif \
+    && apt-get purge -y libde265-dev libheif-dev libffi-dev zlib1g-dev libjpeg-dev libssl-dev gcc \
+    && apt-get clean \
+    && apt-get autoclean \
+    && rm -rf /var/lib/apt/lists/* \
     && sed -i 's/$PrivDrop/# $PrivDrop/g' /etc/rsyslog.conf \
     && sed -i '/imklog/s/^/#/' /etc/rsyslog.conf \
     && sed -i 's/#cron/cron/g' /etc/rsyslog.d/50-default.conf \
