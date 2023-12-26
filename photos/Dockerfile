@@ -42,7 +42,6 @@ RUN apt-get upgrade \
     && npm install -g pm2 \
     && mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bk \
     && pip install setuptools pillow configparser pyexiftool pyheif \
-    && apt-get purge -y libde265-dev libheif-dev libffi-dev zlib1g-dev libjpeg-dev libssl-dev gcc \
     && apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* \
