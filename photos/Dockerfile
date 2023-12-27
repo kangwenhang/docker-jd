@@ -41,7 +41,7 @@ RUN apt-get upgrade \
     && npm config set strict-ssl false \
     && npm install -g pm2 \
     && mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bk \
-    && pip install setuptools pillow configparser pyexiftool pyheif \
+    && pip install setuptools pillow configparser pyexiftool pyheif exifread==2.3.2 \
     && apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* \

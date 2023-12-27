@@ -81,7 +81,7 @@ def create_logger(log_path, log_name):
     if not os.path.exists(os.path.dirname(log_path)):
         os.makedirs(os.path.dirname(log_path))
     log_handler = RotatingFileHandler(log_path, maxBytes=100*1024*1024, backupCount=5)
-    log_formatter = logging.Formatter(f'{asctime} {message}')
+    log_formatter = logging.Formatter('%(asctime)s %(message)s')
     log_handler.setFormatter(log_formatter)
     log = logging.getLogger(log_name)
     log.setLevel(logging.INFO)
@@ -101,7 +101,7 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
     if not os.path.exists(db_path):
         conn = sqlite3.connect(db_path)
         cur = conn.cursor()
-        cur.execute("CREATE TABLE files (filename TEXT, hash TEXT)")
+        cur.execute("CREATE TABLE photos (filename TEXT, hash TEXT)")
         conn.commit()
         cur.close()
         conn.close()
@@ -113,7 +113,7 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                 conn = sqlite3.connect(db_path)
                 cur = conn.cursor()
                 file_hash = calculate_hash(file_path)
-                cur.execute("SELECT filename FROM files WHERE hash = ?", (file_hash,))
+                cur.execute("SELECT filename FROM photos WHERE hash = ?", (file_hash,))
                 result = cur.fetchone()
                 if result is not None:
                     duplicated_filename = result[0]
@@ -122,7 +122,7 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                     continue
                 else:
                     log_dict['log_photos_hash'].info(f'hash value {file_hash}')
-                    cur.execute("INSERT INTO files (filename, hash) VALUES (?, ?)", (filename, file_hash))
+                    cur.execute("INSERT INTO photos (filename, hash) VALUES (?, ?)", (filename, file_hash))
                     conn.commit()
                 cur.close()
                 conn.close()
@@ -188,12 +188,11 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                     os.makedirs(month_folder)
                 # 在移动文件之前，检查目标文件夹中是否已经存在相同的文件名，如果存在，就在文件名后面加上一个数字
                 new_file_path = os.path.join(month_folder, new_filename)
-                if file_hash not in file_hashes:
-                    counter = 1
-                    while os.path.exists(new_file_path):
-                        new_filename = date_str + '-' + str(counter) + ext
-                        new_file_path = os.path.join(month_folder, new_filename)
-                        counter += 1
+                counter = 1
+                while os.path.exists(new_file_path):
+                    new_filename = date_str + '-' + str(counter) + ext
+                    new_file_path = os.path.join(month_folder, new_filename)
+                    counter += 1
                 # 移动文件到对应的月份文件夹下，并用新的文件名重命名，并记录日志
                 shutil.move(file_path, new_file_path)
                 log_dict['log_photos_organize'].info(f"Moved file: {filename} to {month_folder} and renamed to {new_filename}")
