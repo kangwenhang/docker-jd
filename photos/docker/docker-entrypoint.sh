@@ -42,7 +42,7 @@ else
 fi
 
 echo -e "==================2. 运行初始化数据库脚本========================\n"
-python3 /photos/script/dbinitialize.py
+python3 /photos/config/dbinitialize.py
 if [ $? -eq 0 ]; then
   echo "初始化数据库成功"
 else

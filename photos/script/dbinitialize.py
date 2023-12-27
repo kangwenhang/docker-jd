@@ -46,7 +46,7 @@ def process_db_file(db_file, db_name):
         # 定义一个空集合，用于存储对比文件夹中的文件hash值
         folder_hashes = set()
         # 调用一个函数，递归地遍历对比文件夹中的所有文件和子文件夹，将文件hash值添加到集合中
-        traverse_folder_files(os.path.join("/photos/organized", target_path), folder_hashes)
+        traverse_folder_files(os.path.join(PHOTOS_PATH, target_path), folder_hashes)
         # 比较数据库中的hash值和对比文件夹中的hash值，找出需要删除和添加的hash值
         hashes_to_delete = db_hashes - folder_hashes
         hashes_to_add = folder_hashes - db_hashes
