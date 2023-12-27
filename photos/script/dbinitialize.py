@@ -43,18 +43,10 @@ def process_db_file(db_file, db_name):
         db_hashes = set([result[0] for result in results])
         # 根据数据库文件的名称，找到对应的对比文件夹的名称，它们在source_paths和target_paths中的位置相同
         target_path = target_paths[source_paths.index(db_name)]
-        # 获取对比文件夹下的所有文件
-        files = os.listdir(os.path.join(PHOTOS_PATH, target_path))
         # 定义一个空集合，用于存储对比文件夹中的文件hash值
         folder_hashes = set()
-        # 遍历每个文件
-        for file in files:
-            # 拼接完整的文件路径
-            file_path = os.path.join(PHOTOS_PATH, target_path, file)
-            # 计算文件的hash值，使用md5算法
-            file_hash = hashlib.md5(open(file_path, 'rb').read()).hexdigest()
-            # 将文件的hash值添加到集合中
-            folder_hashes.add(file_hash)
+        # 调用一个函数，递归地遍历对比文件夹中的所有文件和子文件夹，将文件hash值添加到集合中
+        traverse_folder_files(os.path.join("/photos/organized", target_path), folder_hashes)
         # 比较数据库中的hash值和对比文件夹中的hash值，找出需要删除和添加的hash值
         hashes_to_delete = db_hashes - folder_hashes
         hashes_to_add = folder_hashes - db_hashes
@@ -70,6 +62,25 @@ def process_db_file(db_file, db_name):
             cursor.execute("INSERT INTO photos (file_name, file_hash) VALUES (?, ?)", (hash_to_add, hash_to_add))
             # 提交更改
             conn.commit()
+
+# 定义一个函数，它可以递归地遍历对比文件夹中的所有文件和子文件夹，将文件hash值添加到集合中
+def traverse_folder_files(folder_path, folder_hashes):
+    # 获取文件夹下的所有文件和子文件夹
+    items = os.listdir(folder_path)
+    # 遍历每个文件或子文件夹
+    for item in items:
+        # 拼接完整的文件或子文件夹路径
+        item_path = os.path.join(folder_path, item)
+        # 如果是一个文件
+        if os.path.isfile(item_path):
+            # 计算文件的hash值，使用md5算法
+            file_hash = hashlib.md5(open(item_path, 'rb').read()).hexdigest()
+            # 将文件的hash值添加到集合中
+            folder_hashes.add(file_hash)
+        # 如果是一个子文件夹
+        elif os.path.isdir(item_path):
+            # 递归地遍历子文件夹中的所有文件和子文件夹，将文件hash值添加到集合中
+            traverse_folder_files(item_path, folder_hashes)
 
 # 调用函数，遍历数据库文件
 traverse_db_files(source_paths)
