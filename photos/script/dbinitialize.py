@@ -36,7 +36,7 @@ def process_db_file(db_file, db_name):
         # 创建一个游标对象
         cursor = conn.cursor()
         # 执行SQL语句，查询所有的文件hash值
-        cursor.execute("SELECT file_hash FROM photos")
+        cursor.execute("SELECT hash FROM photos")
         # 获取查询结果
         results = cursor.fetchall()
         # 将查询结果转换为一个集合，方便后续的比较
@@ -53,13 +53,13 @@ def process_db_file(db_file, db_name):
         # 遍历每个需要删除的hash值
         for hash_to_delete in hashes_to_delete:
             # 执行SQL语句，删除数据库中对应的记录
-            cursor.execute("DELETE FROM photos WHERE file_hash = ?", (hash_to_delete,))
+            cursor.execute("DELETE FROM photos WHERE hash = ?", (hash_to_delete,))
             # 提交更改
             conn.commit()
         # 遍历每个需要添加的hash值
         for hash_to_add in hashes_to_add:
             # 执行SQL语句，插入数据库中对应的记录，假设文件名和hash值相同
-            cursor.execute("INSERT INTO photos (file_name, file_hash) VALUES (?, ?)", (hash_to_add, hash_to_add))
+            cursor.execute("INSERT INTO photos (filename, hash) VALUES (?, ?)", (hash_to_add, hash_to_add))
             # 提交更改
             conn.commit()
 
