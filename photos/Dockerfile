@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y curl gcc libssl-dev libjpeg-dev zlib1g-
     && curl -O https://nodejs.org/dist/v16.13.0/node-v16.13.0-linux-x64.tar.xz \
     && tar xJf node-v16.13.0-linux-x64.tar.xz && mv node-v16.13.0-linux-x64 /opt/node \
     && curl -O https://bootstrap.pypa.io/get-pip.py \
+    && mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bk \
     && python3 get-pip.py && rm get-pip.py \
     && pip install setuptools pillow configparser pyexiftool pyheif exifread==2.3.2 \
     && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
