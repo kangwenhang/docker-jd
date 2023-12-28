@@ -19,6 +19,7 @@ ENV LANG=zh_CN.UTF-8 \
     dir_root=/photos
 WORKDIR ${dir_root}
 COPY --from=builder /opt/node /opt/node
+RUN ls /opt/node
 ENV PATH=/opt/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 COPY --from=builder /usr/local/bin /usr/local/bin
 COPY --from=builder /usr/local/lib /usr/local/lib
