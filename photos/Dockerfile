@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y curl gcc libssl-dev libjpeg-dev zlib1g-
     && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # 第二个构建阶段，用来运行Python脚本和Node.js应用
-FROM alpine:3.14
+FROM python:alpine3.19
 ENV LANG=zh_CN.UTF-8 \
     LC_ALL=C \
     SHELL=/bin/bash \
