@@ -1,7 +1,7 @@
 # 第一个构建阶段，用来安装和下载一些软件包和文件
 FROM ubuntu:24.04 AS builder
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y curl gcc libssl-dev libjpeg-dev zlib1g-dev libffi-dev libheif-dev libde265-dev xz-utils \
+RUN apt-get update && apt-get install -y curl gcc libssl-dev libjpeg-dev zlib1g-dev libffi-dev libheif-dev libde265-dev xz-utils python3 \
     && curl -O https://nodejs.org/dist/v16.13.0/node-v16.13.0-linux-x64.tar.xz \
     && tar xJf node-v16.13.0-linux-x64.tar.xz && mv node-v16.13.0-linux-x64 /opt/node \
     && curl -O https://bootstrap.pypa.io/get-pip.py \
