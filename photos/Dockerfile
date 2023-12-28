@@ -18,7 +18,6 @@ ENV PATH=/opt/node/bin:$PATH \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " \
     dir_root=/photos
-SHELL ["/bin/bash", "-c"]
 WORKDIR ${dir_root}
 COPY --from=builder /opt/node /opt/node
 COPY --from=builder /usr/local/bin /usr/local/bin
