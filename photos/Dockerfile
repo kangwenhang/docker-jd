@@ -12,8 +12,7 @@ RUN apt-get update && apt-get install -y curl gcc libssl-dev libjpeg-dev zlib1g-
 
 # 第二个构建阶段，用来运行Python脚本和Node.js应用
 FROM alpine:3.14
-ENV PATH=/opt/node/bin:$PATH \
-    LANG=zh_CN.UTF-8 \
+ENV LANG=zh_CN.UTF-8 \
     LC_ALL=C \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " \
