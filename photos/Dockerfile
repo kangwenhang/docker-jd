@@ -18,15 +18,14 @@ ENV LANG=zh_CN.UTF-8 \
     PS1="\u@\h:\w \$ " \
     dir_root=/photos
 WORKDIR ${dir_root}
-COPY --from=builder /opt/node /opt/node
-RUN ls /opt/node
-ENV PATH=/opt/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 COPY --from=builder /usr/local/bin /usr/local/bin
 COPY --from=builder /usr/local/lib /usr/local/lib
 COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
 COPY script /photos/script
 COPY sample /photos/sample
-RUN apk add --no-cache bash git curl wget tzdata tar jq vim coreutils \
+RUN apk add --no-cache bash git curl wget tzdata tar jq vim nodejs  \
+    && node -v \
+    && python3 -v \
     && npm config set strict-ssl false \
     && npm install -g pm2 \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
