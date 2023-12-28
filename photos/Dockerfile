@@ -23,7 +23,7 @@ COPY --from=builder /usr/local/lib /usr/local/lib
 COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
 COPY script /photos/script
 COPY sample /photos/sample
-RUN apk add --no-cache bash git curl wget tzdata tar jq vim nodejs  \
+RUN apk add --no-cache bash git curl wget tzdata tar jq vim nodejs npm \
     && node -v \
     && python3 -v \
     && npm config set strict-ssl false \
