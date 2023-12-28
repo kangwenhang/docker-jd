@@ -1,0 +1,7 @@
+# requirements.txt
+setuptools
+pillow
+configparser
+pyexiftool
+pyheif
+exifread==2.3.2
