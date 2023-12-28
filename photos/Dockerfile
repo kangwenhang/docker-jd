@@ -8,7 +8,7 @@ WORKDIR ${dir_root}
 COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
 COPY script /photos/script
 COPY sample /photos/sample
-RUN apk add --no-cache bash git gcc curl wget tzdata tar jq vim nodejs npm musl-dev \
+RUN apk add --no-cache bash git gcc curl wget tzdata tar jq vim nodejs npm musl-dev libheif-dev \
     && npm config set strict-ssl false \
     && npm install -g pm2 \
     && pip install setuptools pillow configparser pyexiftool pyheif exifread==2.3.2 \
