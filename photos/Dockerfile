@@ -20,6 +20,7 @@ ENV PATH=/opt/node/bin:$PATH \
     dir_root=/photos
 WORKDIR ${dir_root}
 COPY --from=builder /opt/node /opt/node
+ENV PATH=/opt/node/bin:$PATH
 COPY --from=builder /usr/local/bin /usr/local/bin
 COPY --from=builder /usr/local/lib /usr/local/lib
 COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
