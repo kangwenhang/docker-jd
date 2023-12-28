@@ -25,7 +25,7 @@ COPY --from=builder /usr/local/lib /usr/local/lib
 COPY docker/docker-entrypoint.sh ${dir_root}/docker-entrypoint.sh
 COPY script /photos/script
 COPY sample /photos/sample
-RUN apk add --no-cache bash git curl wget tzdata tar jq vim \
+RUN apk add --no-cache bash git curl wget tzdata tar jq vim xz \
     && npm config set strict-ssl false \
     && npm install -g pm2 \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
