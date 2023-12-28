@@ -55,11 +55,6 @@ pm2 start 'bash upcron.sh'
 echo -e "定时同步启动成功...\n"
 
 echo -e "==========================4.启动定时============================\n"
-: > /var/log/cron.log
-rm -rf /run/rsyslogd.pid
-rm -rf /var/run/crond.pid
-/usr/sbin/rsyslogd
-service cron start
-tail -f /var/log/cron.log | grep -v 'run-parts'
+crond -f >/dev/null
 
 exec "$@"
