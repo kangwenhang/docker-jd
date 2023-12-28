@@ -40,17 +40,6 @@ target_paths_name = config.get('paths', 'target_paths').split(',')
 target_paths_prefix = os.path.join(ROOT_PATH, 'data')
 target_paths = [os.path.join(target_paths_prefix, path) for path in target_paths_name]
 
-# 日志变量-字典
-log_dict = {
-    'log_photos_low_res': os.path.join(LOGS_PATH, *source_paths_name, 'move', 'low_res.log'),
-    'log_photos_small_size': os.path.join(LOGS_PATH, *source_paths_name, 'move', 'small_size.log'),
-    'log_photos_duplicated': os.path.join(LOGS_PATH, *source_paths_name, 'move', 'duplicated.log'),
-    'log_photos_screenshot': os.path.join(LOGS_PATH, *source_paths_name, 'move', 'screenshot.log'),
-    'log_photos_organize': os.path.join(LOGS_PATH, *source_paths_name, 'move', 'organize.log'),
-    'log_photos_hash': os.path.join(LOGS_PATH, *source_paths_name, 'hash', 'hash.log'),
-    'log_photos_error': os.path.join(LOGS_PATH, *source_paths_name, 'error', 'error.log')
-}
-
 # 获取图片日期
 def get_date_taken(file_path):
     try:
@@ -197,16 +186,25 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                 shutil.move(file_path, new_file_path)
                 log_dict['log_photos_organize'].info(f"Moved file: {filename} to {month_folder} and renamed to {new_filename}")
 
-# 新增的代码：用一个循环来调用函数，创建日志文件的处理器和记录器
-for item, log_path in log_dict.items():
-    log_dict[item] = create_logger(log_path, item)
-
 # 检查source_path和target_path长度是否相等，如果不相等，就抛出一个异常，并记录日志
 if len(source_paths) != len(target_paths):
     raise ValueError("Source paths and target paths do not match")
 
 # 遍历每个source_path和target_path，调用organize_files_by_date函数
 for source, target in zip(source_paths, target_paths):
+    # 日志变量-字典
+    log_dict = {
+        'log_photos_low_res': os.path.join(os.path.basename(source), 'move', 'low_res.log'),
+        'log_photos_small_size': os.path.join(os.path.basename(source), 'move', 'small_size.log'),
+        'log_photos_duplicated': os.path.join(os.path.basename(source), 'move', 'duplicated.log'),
+        'log_photos_screenshot': os.path.join(os.path.basename(source), 'move', 'screenshot.log'),
+        'log_photos_organize': os.path.join(os.path.basename(source), 'move', 'organize.log'),
+        'log_photos_hash': os.path.join(os.path.basename(source), 'hash', 'hash.log'),
+        'log_photos_error': os.path.join(os.path.basename(source), 'error', 'error.log')
+    }
+    # 新增的代码：用一个循环来调用函数，创建日志文件的处理器和记录器
+    for item, log_path in log_dict.items():
+        log_dict[item] = create_logger(os.path.join(LOGS_PATH, log_path), item)
     db_name = os.path.basename(source) + '.db'
     db_path = os.path.join(DB_FOLDER, db_name)
     organize_files_by_date(source, target)
