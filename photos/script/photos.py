@@ -126,15 +126,18 @@ def organize_files_by_date(directory, target, min_resolution=(low_res_width_thre
                         continue
                 if filename.lower().endswith(tuple(photo_formats)):
                     if filename.lower().endswith(".heic"):
-                        heif_file = pyheif.read_heif(file_path)
-                        img = Image.frombytes(
-                        heif_file.mode, 
-                        heif_file.size, 
-                        heif_file.data,
-                        "raw",
-                        heif_file.mode,
-                        heif_file.stride,
-                        )
+                        try:
+                            heif_file = pyheif.read_heif(file_path)
+                            img = Image.frombytes(
+                            heif_file.mode, 
+                            heif_file.size, 
+                            heif_file.data,
+                            "raw",
+                            heif_file.mode,
+                            heif_file.stride,
+                            )
+                        except Exception as e:
+                            print(e)
                     else: 
                         img = Image.open(file_path)
                     # 如果文件的分辨率低于阈值，就移动到低分辨率文件夹，并记录日志
